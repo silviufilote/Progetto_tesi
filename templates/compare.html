@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+    
+{% block head %}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col main-title">Compare cryptos</div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="input-group mb-3 center">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="insert crypto's id" id='coinListInput' onchange="freshDropdown()">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Select coin</button>
+                <ul class="dropdown-menu dropdown-menu-end" id='coinListDropdown'>
+                    <li class = "dropdown-item"> insert a coin </li>
+                </ul>
+            </div>
+            </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="input-group mb-3 center">
+                <select class="form-select" aria-label="Default select example" id="coinDaysAgo" onchange="freshtimeSeries(this)" disabled>  // onchange="freshtimeSeries(this)" 
+                    <option value="" selected>Days ago time series</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  </select>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div style="text-align: center;" class="col-8 radio-inline" id="coins_selected">
+            
+
+
+        </div>
+        <div class="col"></div>
+    </div>
+
+     <!-- Card 1 -->
+
+     <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin1">Info coins</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                        <div>
+                            <p>mean</p>
+                            <p>% price 7h - 24h ..</p>
+                       </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col"></div>
+    </div>
+
+
+    <!-- Card 1 -->
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin1">INSERT 3 COINS</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                       <div id = "time-series-coin1">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col"></div>
+    </div>
+
+
+     <!-- Card 2 -->
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin2">INSERT 3 COINS</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                       <div id = "time-series-coin2">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+
+     <!-- Card 3 -->
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin3">INSERT 3 COINS</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                       <div id = "time-series-coin3">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block javascript %} 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{{ url_for('static', filename='js/compare.js') }}"></script> 
+{% endblock %}

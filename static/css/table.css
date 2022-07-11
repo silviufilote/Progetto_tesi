@@ -1,0 +1,87 @@
+.data-table-css {
+	border-collapse: collapse;
+	border: 1px solid rgba(189, 195, 199, 1);
+	box-shadow: var(--table-box-shadow)
+}
+
+.table tr {
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.table th, .table td {
+	font-family: monospace;
+	text-align: left;
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+}
+
+#header {
+	background-color: var(--primary-color);
+	color: rgba(255, 255, 255, 1);
+}
+
+.table h1 {
+	background-color: var(--primary-color);
+	color: rgba(255, 255, 255, 1);
+}
+
+.clickable-row:hover {
+	background-color: var(--table-hover-element);
+	transform: scale(1.02);
+	box-shadow:var(--table-box-shadow);
+}
+
+.pagination, .dataTables_info {
+	font-family: monospace !important;
+}
+
+
+.page-item{
+    padding: 0 !important;
+}
+
+.page-link {
+	color: var(--primary-color);
+}
+
+.page-item.active .page-link {
+	background-color: var(--primary-color);
+}
+
+#dataTable_wrapper > .row{
+    margin-bottom: 2%;
+    font-family: monospace;
+}
+
+.dataTables_length .dataTable_filter{
+    font-family: monospace;
+}
+
+.dataTables_length, .dataTables_info, .text, .dataTables_filter{
+    color: var(--text-color);
+}
+
+input{
+	background-color: var(--primary-color-light);
+}
+
+body.dark .page-link {
+	color: var(--text-color);
+	background-color: var(--primary-color-light);
+}
+
+
+.active>.page-link, .page-link.active {
+	border-color: var(--primary-color);
+}
+
+
+.pagination{
+    --bs-pagination-focus-box-shadow: none;
+}
+
+
+.logo-crypto-table{
+	width: 13% !important;
+}
+

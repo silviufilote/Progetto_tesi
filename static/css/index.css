@@ -1,0 +1,75 @@
+@font-face {
+    font-family: hack;
+    src: url(Hack-Regular.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*font-family: 'Poppins', sans-serif; */
+    font-family: monospace;
+}
+
+
+html{
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.shell-content{
+    font-family: monospace;
+}
+
+
+body{
+    background-image: linear-gradient(to bottom, #3a3b3c, #464a5c, #665477, #955881, #c35c77, #d66c82, #e97d8e, #fc8e9a, #fbabc7, #f5c9e7, #f4e6f9, #ffffff);
+    color:#FFF;
+    text-align: center;
+}
+
+.m_top{
+    margin-top: 10%;
+}
+
+.secondary-color{
+    color:#CF5C36;
+}
+
+
+.subtitle{
+    font-size: 1.3rem;
+}
+
+.card{
+    --bs-card-bg:#1D1E22 !important;
+    -bs-card-spacer-y: 0.4rem !important;
+}
+
+.btn-rad{
+    border-radius: 3px;
+    padding: 3px;
+    margin-top: -2rem;
+}
+
+
+.btn-home{
+    margin-top: 4%;
+}
+
+
+#btn-card{
+    background-color: #4C4F5A;
+}
+
+.btn_color{
+    background-color: #CF5C36;
+    color: #FFF;
+}
+
+@media screen and (max-width: 600px) {
+
+    .btn-home{
+        margin-top: 4rem;
+    }
+}   

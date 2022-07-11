@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col main-title">General statics</div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-4">
+            <div class ="card card1-css card-statistics1">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin2">Trending</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                        <div class="col" id="trending-coins-id">
+                            
+                        </div>
+                        <div class="col" id="trending-coins-symbol">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class ="card card1-css card-statistics1">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin2">GLOBAL INFO:</span>
+                  
+                    <div style="margin-top:10%;" class="row">
+                        <div class="col">
+                            <label>upcoming icos:</label> <br>
+                            <label>ongoing icos:</label> <br>
+                            <label>ended icos:</label> <br>
+                            <label>markets:</label> <br>
+                        </div>
+                        <div class="col">
+                            <label id="upcoming_icos"></label><br>
+                            <label id="ongoing_icos"></label><br>
+                            <label id="ended_icos"></label><br>
+                            <label id="markets"></label><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-4">
+            <div class ="card card1-css card-statistics2">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin2">TOTAL ACTIVE COINS:</span>
+                  
+                    <div style="margin-top:4%; font-size: 3rem;" class="row">
+                       <div id = "active-coins">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class ="card card1-css card-statistics2">
+                <div class="card-body">
+                    <span class="card-title coin-time-series-coin2">HIGHEST PRICE COIN:</span>
+                  
+                    <div style="margin-top:7%" class="row">
+                        <div class="col">
+                            <label style="font-size: 1.2rem" id="id-highest-coin"></label>
+                        </div>
+                        <div class="col">
+                            <label style="font-size: 1.2rem" id="price-highest-coin"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %} 
+    <script src="{{ url_for('static', filename='js/statistics.js') }}"></script> 
+{% endblock %}

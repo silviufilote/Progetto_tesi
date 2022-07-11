@@ -1,0 +1,83 @@
+.statistic-card-text{
+    font-size: 3rem;
+    text-align: center;
+}
+
+.active-sidepanel{
+    background-color: var(--primary-color) !important;
+    color:#fff !important;
+}
+
+.active-sidepanel i, .active-sidepanel span{
+    color:#fff !important;
+}
+
+
+.main-title{
+    font-size: 4rem;
+    color: var(--text-color);
+    text-align: center;
+    margin: 4%;
+}
+
+.card{  
+    border: var(--border-item);
+    box-shadow: var(--table-box-shadow);               
+    color: #fff !important;
+    padding: 5%;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 20px;
+}
+
+.card1-css{
+    background-image: var(--var-card1-backgound-color);
+}
+
+.card-title{
+    font-family: monospace;
+    font-size: 2.5rem;
+}
+
+.apexcharts-tooltip {
+    background:  linear-gradient(to right top, #4eff00, #a4e500, #d2ca00, #efac00, #ff8f00) !important;
+    color:black !important;
+    font-family: monospace !important;
+}
+
+.card-body{
+    color: #fff !important;
+}
+
+
+
+.apexcharts-yaxis-label{
+    color: #fff !important;
+}
+
+
+.card-statistics1{
+    height: 270px !important;
+}
+
+
+.card-statistics2{
+    height: 200px !important;
+}
+
+@media only screen and (max-width:1000px){
+
+
+    .col-adjust-menu{
+        margin-left: 88px !important;
+        width: 20% !important;
+    }
+
+    .col-adjust-menu .toggle{
+        margin-left: 250px !important;
+    }
+
+    
+}

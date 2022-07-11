@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col main-title">Check a coin status</div>
+    </div>
+    <div class="row align-self-center">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="input-group mb-3 center">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="insert crypto's id" id='coinListInput' onchange="freshDropdown()">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Select coin</button>
+                <ul class="dropdown-menu dropdown-menu-end" id='coinListDropdown'>
+                    <li class = "dropdown-item"> insert a coin </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="input-group mb-3 center">
+                <select class="form-select" aria-label="Default select example" id="coinDaysAgo" onchange="freshtimeSeries(this)" disabled>
+                    <option value="" selected>Days ago time series</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  </select>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span> <span class="card-title coin-title"></span> <span style="position: absolute; margin-left: 4%; padding:2%" id="coin-gecko-rank">coingecko rank: </span></span>
+
+                  
+                    <div style="margin-top:2%" class="row">
+                        <div style="text-align: left;" class="col">
+                            <label>id: </label><br>
+                            <label>symbol: </label><br>
+                            <label>name: </label><br>
+                            <label>genesis_date: </label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label>ATH (All Time High):</label><br>
+                            <label>ATL (All Time Low):</label><br>
+                            <label>current_price: </label><br>
+                            <label>market_cap_rank: </label><br>
+                            <label>market_cap: </label><br>
+                            <label>total_volume: </label><br>
+                            <label>high_24h: </label><br>
+                            <label>low_24h: </label><br>
+                            <label>price_change_24h_in_currency: </label><br>
+                            <label>price_change_percentage_1h_in_currency: </label><br>
+                        </div>
+                        <div style="text-align: right; display: inline-block;" class="col">
+                            <label id="coin-id"></label><br>
+                            <label id="coin-symbol"></label><br>
+                            <label id="coin-name"></label><br>
+                            <label id="coin-genesis_date"></label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label id="coin-ath"></label><br>
+                            <label id="coin-atl"></label><br>
+                            <label id="coin-current_price"></label><br>
+                            <label id="coin-market_cap_rank"></label><br>
+                            <label id="coin-market_cap"></label><br>
+                            <label id="coin-total_volume"></label><br>
+                            <label id="coin-high_24h"></label><br>
+                            <label id="coin-low_24h"></label><br>
+                            <label id="coin-price_change_24h"></label><br>
+                            <label id="coin-price_change_1h"></label><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series">INSERT A COIN</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                       <div id = "time-series">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title coin-time-series">INSERT A COIN</span>
+                  
+                    <div style="margin-top:4%" class="row">
+                       <div id = "forecasting-time-series">
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            
+            <div class ="card card1-css">
+                <div class="card-body">
+                    <span class="card-title">TIME SERIES RESULTS</span>
+                  
+                    <div style="margin-top:2%" class="row">
+                        <div  style="text-align: left;" class="col">
+                            <label>Mean: </label><br>
+                            <label>Highest value: </label><br>
+                            <label>Lowest value: </label><br>
+                            <label>Days ago: </label><br>
+                            <hr><hr>
+                        </div>
+                        <div  style="text-align: right;" class="col">
+                            <label id="series-mean"></label><br>
+                            <label id="series-max"></label><br>
+                            <label id="series-low"></label><br>
+                            <label id="series-daysAgo"></label><br>
+                            <hr><hr>
+                        </div>
+                    </div>
+
+                    <span class="card-title">FORECASTING TIME SERIES RESULTS</span>
+
+                    <div style="margin-top:2%" class="row">
+                        <div  style="text-align: left;" class="col">
+                            <label>Mean: </label><br>
+                            <label>Highest value: </label><br>
+                            <label>Lowest value: </label><br>
+                            <label>Days:</label><br>
+                        </div>
+                        <div  style="text-align: right;" class="col">
+                            <label id="series-forecast-mean"></label><br>
+                            <label id="series-forecast-max"></label><br>
+                            <label id="series-forecast-min"></label><br>
+                            <label id="series-forecast-days"></label><br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{{ url_for('static', filename='js/check.js') }}"></script>
+{% endblock %}
