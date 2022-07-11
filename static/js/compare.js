@@ -1,11 +1,14 @@
 
-/// forecast coin1
+/// forecast coin
+
 
 var options1 = {
-    series: [{
-        name: "Coin value",
-        data: []
-    }],
+    series: [
+        {
+            name: "Coin value",
+            data: []
+        }
+    ],
     chart: {
         type: 'area',
         stacked: false,
@@ -117,252 +120,8 @@ var options1 = {
     }
 };
 
-var chart1 = new ApexCharts(document.querySelector("#time-series-coin1"), options1);
+var chart1 = new ApexCharts(document.querySelector("#time-series-coin"), options1);
 chart1.render();
-
-/// forecast coin2
-
-var options2 = {
-    series: [{
-        name: "Coin value",
-        data: []
-    }],
-    chart: {
-        type: 'area',
-        stacked: false,
-        height: 350,
-        zoom: {
-            type: 'x',
-            enabled: true,
-            autoScaleYaxis: true
-        },
-        toolbar: {
-            autoSelected: 'zoom'
-        },
-        dropShadow: {
-            enabled: true,
-            enabledOnSeries: undefined,
-            top: 0,
-            left: 0,
-            blur: 0.2,
-            color: '#000',
-            opacity: 0.3
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        curve: 'smooth',
-        lineCap: 'butt',
-        colors: undefined,
-        width: 2,
-        dashArray: 0,
-    },
-    grid: {
-        row: {
-            colors: undefined, // takes an array which will be repeated on columns
-            opacity: 0.5
-        },
-    },
-    theme: {
-        mode: 'light',
-        monochrome: {
-            enabled: true,
-            color: '#00c9b7' ,
-            shadeTo: 'light',
-            shadeIntensity: 0.8
-        },
-    },
-    title:{
-        style:{
-            fontFamily: 'monospace'
-        }
-    },
-    xaxis: {
-        type: 'numeric',
-        tickAmount: 6,
-        decimalsInFloat: 0,
-        title: {
-            text: 'days ago',
-            style:{
-                color: '#FFFFFF',
-                fontFamily: 'monospace'
-            }
-        },
-        labels: {
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: 'white',
-            }
-        }
-    },
-    forecastDataPoints: {
-        count: 0,
-        fillOpacity: 0.5,
-        strokeWidth: undefined,
-        dashArray: 4,
-    },
-    yaxis: {
-        type: 'numeric',
-        tickAmount: 4,
-        decimalsInFloat: 2,
-        title: {
-            text: 'value in €',
-            style:{
-                fontFamily: 'monospace',
-                color: '#FFFFFF'
-            }
-        },
-        labels:{
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: '#fff'
-            }
-        },
-        tooltip:{
-            style:{
-                color:'#F86624',
-            }
-        }
-    },
-    tooltip:{
-        enabled: true,
-        fillSeriesColor: false,
-        style:{
-            fontFamily: 'monospace'
-        }
-    }
-};
-
-var chart2 = new ApexCharts(document.querySelector("#time-series-coin2"), options2);
-chart2.render();
-
-/// forecast coin3
-
-var options3 = {
-    series: [{
-        name: "Coin value",
-        data: []
-    }],
-    chart: {
-        type: 'area',
-        stacked: false,
-        height: 350,
-        zoom: {
-            type: 'x',
-            enabled: true,
-            autoScaleYaxis: true
-        },
-        toolbar: {
-            autoSelected: 'zoom'
-        },
-        dropShadow: {
-            enabled: true,
-            enabledOnSeries: undefined,
-            top: 0,
-            left: 0,
-            blur: 0.2,
-            color: '#000',
-            opacity: 0.3
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        curve: 'smooth',
-        lineCap: 'butt',
-        colors: undefined,
-        width: 2,
-        dashArray: 0,
-    },
-    grid: {
-        row: {
-            colors: undefined, // takes an array which will be repeated on columns
-            opacity: 0.5
-        },
-    },
-    theme: {
-        mode: 'light',
-        monochrome: {
-            enabled: true,
-            color: '#00c9b7' ,
-            shadeTo: 'light',
-            shadeIntensity: 0.8
-        },
-    },
-    title:{
-        style:{
-            fontFamily: 'monospace'
-        }
-    },
-    xaxis: {
-        type: 'numeric',
-        tickAmount: 6,
-        decimalsInFloat: 0,
-        title: {
-            text: 'days ago',
-            style:{
-                color: '#FFFFFF',
-                fontFamily: 'monospace'
-            }
-        },
-        labels: {
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: 'white',
-            }
-        }
-    },
-    forecastDataPoints: {
-        count: 0,
-        fillOpacity: 0.5,
-        strokeWidth: undefined,
-        dashArray: 4,
-    },
-    yaxis: {
-        type: 'numeric',
-        tickAmount: 4,
-        decimalsInFloat: 2,
-        title: {
-            text: 'value in €',
-            style:{
-                fontFamily: 'monospace',
-                color: '#FFFFFF'
-            }
-        },
-        labels:{
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: '#fff'
-            }
-        },
-        tooltip:{
-            style:{
-                color:'#F86624',
-            }
-        }
-    },
-    tooltip:{
-        enabled: true,
-        fillSeriesColor: false,
-        style:{
-            fontFamily: 'monospace'
-        }
-    }
-};
-
-var chart3 = new ApexCharts(document.querySelector("#time-series-coin3"), options3);
-chart3.render();
-
-
 
 
 
@@ -414,7 +173,6 @@ function freshDropdown(){
     }
     else{
         dropdownList = coinList.filter(coin => coin.includes(filter));
-        console.log(dropdownList);
 
         for (let i = 0; i < dropdownList.length; i++) {
             $('#coinListDropdown').append('<li class = "dropdown-item to-select-item" onclick="getCoinFromInput(this)">' +   dropdownList[i]  + '</li>');
@@ -435,11 +193,78 @@ function freshDropdown(){
         $('#coinDaysAgo').prop('disabled', false);
         //$("#coinDaysAgo").val("100").change();
 
-        $(".coin-time-series-coin1").html('TIME SERIES: ' + coinSelected[0].toUpperCase());
-        $(".coin-time-series-coin2").html('TIME SERIES: ' + coinSelected[1].toUpperCase());
-        $(".coin-time-series-coin3").html('TIME SERIES: ' + coinSelected[2].toUpperCase());
+        $(".coin-time-series-coin").html(coinSelected[0].toUpperCase() + ', ' + coinSelected[1].toUpperCase() + ', ' + coinSelected[2].toUpperCase());
+        
+        displayInfoCoins(coinSelected)
+    
     }
 }
+
+
+
+function displayInfoCoins(coinSelected){
+
+    $("#coin-selected1").html(coinSelected[0]);
+    $("#coin-selected2").html(coinSelected[1]);
+    $("#coin-selected3").html(coinSelected[2]);
+
+    var url = "https://api.coingecko.com/api/v3/coins/markets";
+
+    const options = {
+        method: 'GET',
+        url: url,
+        params:{
+            'vs_currency': 'eur',
+            'ids': String(coinSelected[0] + ',' + coinSelected[1] + ',' + coinSelected[2])
+        }
+    };
+
+    axios.request(options).then(function (response) {
+
+        item = response.data;
+
+        console.log(item);
+
+        x = 1;
+
+        for (let i = 0; i < 3; i++) {
+
+            
+
+            $("#coin-symbol"+x).html(item[i].id);
+            $("#coin-current-price"+ x).html(item[i].current_price);
+            $("#coin-market-cap"+ x).html(item[i].market_cap);
+            $("#coin-market-cap-rank"+ x).html(item[i].market_cap_rank);
+
+
+            $("#coin-high24-"+x).html(item[i].high_24h);
+            $("#coin-low24-"+x).html(item[i].low_24h);
+            $("#coin-price-change24-"+x).html(item[i].price_change_24h);
+            $("#coin-price-change24-percentage-"+x).html(item[i].price_change_percentage_24h);
+
+
+            $("#coin-market-cap24-"+x).html(item[i].market_cap_change_24h);
+            $("#coin-market-cap24-percentage-"+x).html(item[i].market_cap_change_percentage_24h);
+            $("#coin-supply-"+x).html(item[i].circulating_supply);
+
+
+            $("#coin-total-supply-"+x).html(item[i].total_supply);
+            $("#coin-max-supply-"+x).html(item[i].max_supply);
+            $("#coin-ath-"+x).html(item[i].ath);
+            $("#coin-atl-"+x).html(item[i].atl);
+
+            x = x + 1;
+
+        }
+
+    }).catch(function (error) {
+        console.error(error);
+    });
+
+}
+
+
+
 
 
 // Function UpdateCoinsSelected - elimina i coin uncheccando la checkbox
@@ -460,9 +285,10 @@ function UpdateCoinsSelected(checkboxCoin){
       }
 
       $('#coinDaysAgo').prop('disabled', true);
-      $(".coin-time-series-coin1").html('TIME SERIES: ');
-      $(".coin-time-series-coin2").html('TIME SERIES: ');
-      $(".coin-time-series-coin3").html('TIME SERIES: ');
+      $(".coin-time-series-coin").html('INSERT 3 COINS: ');
+      $("#coin-selected1").html('Coin1');
+      $("#coin-selected2").html('Coin2');
+      $("#coin-selected3").html('Coin3');
 }
 
 
