@@ -195,12 +195,12 @@ function freshDropdown(){
 
         $(".coin-time-series-coin").html(coinSelected[0].toUpperCase() + ', ' + coinSelected[1].toUpperCase() + ', ' + coinSelected[2].toUpperCase());
         
-        displayInfoCoins(coinSelected)
-    
+        displayInfoCoins(coinSelected);
     }
 }
 
 
+// Function displayInfoCoins - Riempie con info la card
 
 function displayInfoCoins(coinSelected){
 
@@ -228,8 +228,6 @@ function displayInfoCoins(coinSelected){
         x = 1;
 
         for (let i = 0; i < 3; i++) {
-
-            
 
             $("#coin-symbol"+x).html(item[i].id);
             $("#coin-current-price"+ x).html(item[i].current_price);
@@ -284,11 +282,38 @@ function UpdateCoinsSelected(checkboxCoin){
         }
       }
 
+
+      // pulizia 
+
       $('#coinDaysAgo').prop('disabled', true);
       $(".coin-time-series-coin").html('INSERT 3 COINS: ');
       $("#coin-selected1").html('Coin1');
       $("#coin-selected2").html('Coin2');
       $("#coin-selected3").html('Coin3');
+
+      for (let x = 1; x < 4; x++) {
+            $("#coin-symbol"+x).html('');
+            $("#coin-current-price"+ x).html('');
+            $("#coin-market-cap"+ x).html('');
+            $("#coin-market-cap-rank"+ x).html('');
+
+
+            $("#coin-high24-"+x).html('');
+            $("#coin-low24-"+x).html('');
+            $("#coin-price-change24-"+x).html('');
+            $("#coin-price-change24-percentage-"+x).html('');
+
+
+            $("#coin-market-cap24-"+x).html('');
+            $("#coin-market-cap24-percentage-"+x).html('');
+            $("#coin-supply-"+x).html('');
+
+
+            $("#coin-total-supply-"+x).html('');
+            $("#coin-max-supply-"+x).html('');
+            $("#coin-ath-"+x).html('');
+            $("#coin-atl-"+x).html('');
+    }
 }
 
 
