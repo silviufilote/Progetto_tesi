@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, url_for, request
 from model import forecastArima
-from neural import neural_coins
+from neural import neural_prediction
 
 
 app = Flask(__name__)
@@ -59,7 +59,7 @@ def neural_coins():
         coin3 = request.form['coin3']
         daysAgo = request.form['yValues']
 
-        yValues = neural_coins(coin1, coin2 ,coin3, daysAgo)
+        yValues = neural_prediction(coin1, coin2, coin3, daysAgo)
         return yValues
        
     else:
@@ -72,7 +72,8 @@ with app.test_request_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) ## sarebbe false
+    ## app.run(use_reloader=False)
 
 
 

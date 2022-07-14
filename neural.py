@@ -122,9 +122,16 @@ def neural_network(coin, daysAgo = 100):
     return str(list(lstmdf))
 
 
-def neural_coins(coin1, coin2, coin3, daysAgo):
+def neural_prediction(coin1, coin2, coin3, daysAgo):
+
+    total_list = []
+
     list1 = neural_network(coin1, daysAgo)
     list2 = neural_network(coin2, daysAgo)
     list3 = neural_network(coin3, daysAgo)
 
-    return list1, list2, list3;
+    total_list.append(list1)
+    total_list.append(list2)
+    total_list.append(list3)
+
+    return str(list(total_list))

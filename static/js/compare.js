@@ -1,133 +1,9 @@
 
-/// forecast coin
-
-
-var options1 = {
-    series: [
-        {
-            name: "Coin value",
-            data: []
-        }
-    ],
-    chart: {
-        type: 'area',
-        stacked: false,
-        height: 350,
-        zoom: {
-            type: 'x',
-            enabled: true,
-            autoScaleYaxis: true
-        },
-        toolbar: {
-            autoSelected: 'zoom'
-        },
-        dropShadow: {
-            enabled: true,
-            enabledOnSeries: undefined,
-            top: 0,
-            left: 0,
-            blur: 0.2,
-            color: '#000',
-            opacity: 0.3
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        curve: 'smooth',
-        lineCap: 'butt',
-        colors: undefined,
-        width: 2,
-        dashArray: 0,
-    },
-    grid: {
-        row: {
-            colors: undefined, // takes an array which will be repeated on columns
-            opacity: 0.5
-        },
-    },
-    theme: {
-        mode: 'light',
-        monochrome: {
-            enabled: true,
-            color: '#00c9b7' ,
-            shadeTo: 'light',
-            shadeIntensity: 0.8
-        },
-    },
-    title:{
-        style:{
-            fontFamily: 'monospace'
-        }
-    },
-    xaxis: {
-        type: 'numeric',
-        tickAmount: 6,
-        decimalsInFloat: 0,
-        title: {
-            text: 'days ago',
-            style:{
-                color: '#FFFFFF',
-                fontFamily: 'monospace'
-            }
-        },
-        labels: {
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: 'white',
-            }
-        }
-    },
-    forecastDataPoints: {
-        count: 0,
-        fillOpacity: 0.5,
-        strokeWidth: undefined,
-        dashArray: 4,
-    },
-    yaxis: {
-        type: 'numeric',
-        tickAmount: 4,
-        decimalsInFloat: 2,
-        title: {
-            text: 'value in €',
-            style:{
-                fontFamily: 'monospace',
-                color: '#FFFFFF'
-            }
-        },
-        labels:{
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: '#fff'
-            }
-        },
-        tooltip:{
-            style:{
-                color:'#F86624',
-            }
-        }
-    },
-    tooltip:{
-        enabled: true,
-        fillSeriesColor: false,
-        style:{
-            fontFamily: 'monospace'
-        }
-    }
-};
-
-var chart1 = new ApexCharts(document.querySelector("#time-series-coin"), options1);
-chart1.render();
-
-
 
 var coinList = [];
 getIdAllCoins(coinList);
 var coinSelected = [];
+var chart1 = null;
 
 
 
@@ -189,6 +65,9 @@ function freshDropdown(){
         $("#coins_selected").append('<input class="form-check-input" type="checkbox" value="'+ coin +'" id="' + coin + '-selected" onchange="UpdateCoinsSelected(this)"  checked><label class="form-check-label textbox" for="' + coin + '-selected" id="label-'+coin+'">'+ '&nbsp;' + coin + '&nbsp;' + '</label></input>' );
         coinSelected.push(coin);
     }
+
+    // una volta che seleziono le 3 crypto
+
     if(coinSelected.length == 3) {
         $('#coinDaysAgo').prop('disabled', false);
         //$("#coinDaysAgo").val("100").change();
@@ -196,6 +75,7 @@ function freshDropdown(){
         $(".coin-time-series-coin").html(coinSelected[0].toUpperCase() + ', ' + coinSelected[1].toUpperCase() + ', ' + coinSelected[2].toUpperCase());
         
         displayInfoCoins(coinSelected);
+        $("#time-series-coin").html('Select days ago, check above...');
     }
 }
 
@@ -252,7 +132,6 @@ function displayInfoCoins(coinSelected){
             $("#coin-atl-"+x).html(item[i].atl);
 
             x = x + 1;
-
         }
 
     }).catch(function (error) {
@@ -317,23 +196,29 @@ function UpdateCoinsSelected(checkboxCoin){
 }
 
 
+
+
+
 ///////////////////////////// Time series forecatin
 
-async function forecastCoin(daysAgo){
+async function forecastCoin(coin1, coin2, coin3, daysAgo){
 
     var bodyFormData = new FormData();
 
-    bodyFormData.append('coin', coin);
+    bodyFormData.append('coin1', coin1);
+    bodyFormData.append('coin2', coin2);
+    bodyFormData.append('coin3', coin3);
     bodyFormData.append('yValues', daysAgo); 
 
-    axios({
+    await axios({
         method: "post",
-        url: "forecast.html",
+        url: "neural.html",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then(function (response) {
-            console.log(response);
+            // lista = JSON.parse(response.data);
+            console.log(response.data);
         })
         .catch(function (response) {
           //handle error
@@ -343,27 +228,188 @@ async function forecastCoin(daysAgo){
 
 
 
+///////////////////////// Gestione attesa caricamento del modello e impossibilita di cambiare moneta ogni secondo
+
+
+async function createChart(){
+
+    var options1 = {
+        series: [
+            {
+                name: "High - 2013",
+                data: [28, 29, 33, 36, 32, 32, 33]
+              },
+              {
+                name: "Low - 2013",
+                data: [34, 22, 11, 18, 43, 22, 12]
+              },
+              {
+                name: "Low - 2013",
+                data: [32, 42, 54, 32, 39, 12, 67]
+              },
+              {
+                name: "Low - 2013",
+                data: [12, 11, 14, 18, 17, 13, 13]
+              }
+              
+        ],
+        chart: {
+            type: 'area',
+            stacked: false,
+            height: 350,
+            zoom: {
+                type: 'x',
+                enabled: true,
+                autoScaleYaxis: true
+            },
+            toolbar: {
+                autoSelected: 'zoom'
+            },
+            dropShadow: {
+                enabled: true,
+                enabledOnSeries: undefined,
+                top: 0,
+                left: 0,
+                blur: 0.2,
+                color: '#000',
+                opacity: 0.3
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            lineCap: 'butt',
+            colors: undefined,
+            width: 2,
+            dashArray: 0,
+        },
+        grid: {
+            row: {
+                colors: undefined, // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        theme: {
+            mode: 'light'
+        },
+        title:{
+            style:{
+                fontFamily: 'monospace'
+            }
+        },
+        xaxis: {
+            type: 'numeric',
+            tickAmount: 6,
+            decimalsInFloat: 0,
+            title: {
+                text: 'days ago',
+                style:{
+                    color: '#FFFFFF',
+                    fontFamily: 'monospace'
+                }
+            },
+            labels: {
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: 'white',
+                }
+            }
+        },
+        forecastDataPoints: {
+            count: 0,
+            fillOpacity: 0.5,
+            strokeWidth: undefined,
+            dashArray: 4,
+        },
+        yaxis: {
+            type: 'numeric',
+            tickAmount: 4,
+            decimalsInFloat: 2,
+            title: {
+                text: 'value in €',
+                style:{
+                    fontFamily: 'monospace',
+                    color: '#FFFFFF'
+                }
+            },
+            labels:{
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: '#fff'
+                }
+            },
+            tooltip:{
+                style:{
+                    color:'#F86624',
+                }
+            }
+        },
+        tooltip:{
+            enabled: true,
+            fillSeriesColor: false,
+            style:{
+                fontFamily: 'monospace'
+            }
+        }
+    };
+    
+    var chart1 = new ApexCharts(document.querySelector("#time-series-coin"), options1);
+    chart1.render();
+}
+
+
+
+// function createLoadingState: crea lo stato di loading
+
+async function createLoadingState(){
+    $("#time-series-coin").html('<div style="width: 3rem; height: 3rem;" class="spinner-border m-5" role="status"> <span class="visually-hidden">Loading...</span></div>');
+}
+
+
+async function deleteLoadingState(){
+    $("#time-series-coin").html('');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Function freshtimeSeries: refresha la serie tramite selezione della select
  
-function freshtimeSeries(item){
+async function selectDaysAgo(item){
     if($(item).val() != ''){
-
-        
-
-         //updateChart($(item).val()); // card2 - card4
-        //getSeriesResults($(item).val()); // card3
+        manageLoading($(item).val());
     }
 }
 
 
-/*
-// Function drawChart: calcola il max=1000 lista dell'andamento 
- 
-async function updateChart(daysAgo){
-    chart.updateSeries([{
-         data: yValues.slice(0, daysAgo)
-    }]);
-    forecastCoin(daysAgo);
+
+async function manageLoading(days){
+    $('#coinDaysAgo').prop('disabled', true);
+    createLoadingState();
+    await forecastCoin(coinSelected[0], coinSelected[1], coinSelected[2], days);
+    deleteLoadingState();
+    createChart();
+    $('#coinDaysAgo').prop('disabled', false);
 }
 
-*/
+

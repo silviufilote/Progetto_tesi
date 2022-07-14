@@ -25,7 +25,7 @@
         <div class="col"></div>
         <div class="col-8">
             <div class="input-group mb-3 center">
-                <select class="form-select" aria-label="Default select example" id="coinDaysAgo" onchange="freshtimeSeries(this)" disabled>  // onchange="freshtimeSeries(this)" 
+                <select class="form-select" aria-label="Default select example" id="coinDaysAgo" onchange="selectDaysAgo(this)" disabled>  // onchange="freshtimeSeries(this)" 
                     <option value="" selected>Days ago time series</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
@@ -192,7 +192,6 @@
                   
                     <div style="margin-top:4%" class="row">
                        <div id = "time-series-coin">
-
                        </div>
                     </div>
                 </div>
