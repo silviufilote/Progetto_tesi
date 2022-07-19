@@ -31,6 +31,7 @@ from plotly.subplots import make_subplots
 from pycoingecko import CoinGeckoAPI
 import json
 from datetime import date, timedelta
+import concurrent.futures
 
 
 cg = CoinGeckoAPI()
@@ -43,7 +44,7 @@ def create_dataset(dataset, time_step=1):
         dataY.append(dataset[i + time_step, 0])
     return np.array(dataX), np.array(dataY)
 
-def neural_network(coin, daysAgo = 100):
+def neural_network(coin, daysAgo):
     data = cg.get_coin_market_chart_by_id(id=coin, vs_currency='eur', days=daysAgo, interval = 'daily')['prices']
     array_completo = []
     prices = []
@@ -119,19 +120,21 @@ def neural_network(coin, daysAgo = 100):
     lstmdf.extend((np.array(lst_output).reshape(-1,1)).tolist())
     lstmdf=scaler.inverse_transform(lstmdf).reshape(1,-1).tolist()[0]
 
-    return str(list(lstmdf))
+    return list(lstmdf)
 
 
 def neural_prediction(coin1, coin2, coin3, daysAgo):
-
     total_list = []
+    
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future1 = executor.submit(neural_network, coin1, daysAgo)
+        future2 = executor.submit(neural_network, coin2, daysAgo)
+        future3 = executor.submit(neural_network, coin3, daysAgo)
+        return_value1 = future1.result()
+        return_value2 = future2.result()
+        return_value3 = future3.result()
+        total_list.append(return_value1)
+        total_list.append(return_value2)
+        total_list.append(return_value3)
 
-    list1 = neural_network(coin1, daysAgo)
-    list2 = neural_network(coin2, daysAgo)
-    list3 = neural_network(coin3, daysAgo)
-
-    total_list.append(list1)
-    total_list.append(list2)
-    total_list.append(list3)
-
-    return str(list(total_list))
+    return str(total_list)

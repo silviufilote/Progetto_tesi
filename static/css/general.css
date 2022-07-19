@@ -42,9 +42,10 @@
 }
 
 .apexcharts-tooltip {
-    background:  linear-gradient(to right top, #4eff00, #a4e500, #d2ca00, #efac00, #ff8f00) !important;
+    background: linear-gradient(to right bottom, #ffffff, #eeecef, #dfd9dd, #d2c5c9, #c4b3b3) !important;
     color:black !important;
     font-family: monospace !important;
+    text-align: center;
 }
 
 .card-body{
@@ -59,13 +60,21 @@
 
 
 .card-statistics1{
-    height: 270px !important;
+    height: 90% !important;
 }
 
 
 .card-statistics2{
-    height: 200px !important;
+    height: 80% !important;
 }
+
+
+
+.logo-crypto-table{
+	width: 13% !important;
+}
+
+
 
 @media only screen and (max-width:1000px){
 

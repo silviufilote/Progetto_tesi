@@ -3,7 +3,7 @@
 var coinList = [];
 getIdAllCoins(coinList);
 var coinSelected = [];
-var chart1 = null;
+var chartFlag = null;
 
 
 
@@ -84,9 +84,8 @@ function freshDropdown(){
 
 function displayInfoCoins(coinSelected){
 
-    $("#coin-selected1").html(coinSelected[0]);
-    $("#coin-selected2").html(coinSelected[1]);
-    $("#coin-selected3").html(coinSelected[2]);
+
+    console.log(coinSelected);
 
     var url = "https://api.coingecko.com/api/v3/coins/markets";
 
@@ -109,14 +108,17 @@ function displayInfoCoins(coinSelected){
 
         for (let i = 0; i < 3; i++) {
 
-            $("#coin-symbol"+x).html(item[i].id);
-            $("#coin-current-price"+ x).html(item[i].current_price);
+            $("#coin-selected"+x).html(item[i].id);
+
+            $("#coin-name"+x).html(item[i].name);
+            $("#coin-symbol"+x).html(item[i].symbol);
+            $("#coin-current-price"+ x).html(item[i].current_price + ' €');
             $("#coin-market-cap"+ x).html(item[i].market_cap);
             $("#coin-market-cap-rank"+ x).html(item[i].market_cap_rank);
 
 
-            $("#coin-high24-"+x).html(item[i].high_24h);
-            $("#coin-low24-"+x).html(item[i].low_24h);
+            $("#coin-high24-"+x).html(item[i].high_24h + ' €');
+            $("#coin-low24-"+x).html(item[i].low_24h + ' €');
             $("#coin-price-change24-"+x).html(item[i].price_change_24h);
             $("#coin-price-change24-percentage-"+x).html(item[i].price_change_percentage_24h);
 
@@ -128,8 +130,8 @@ function displayInfoCoins(coinSelected){
 
             $("#coin-total-supply-"+x).html(item[i].total_supply);
             $("#coin-max-supply-"+x).html(item[i].max_supply);
-            $("#coin-ath-"+x).html(item[i].ath);
-            $("#coin-atl-"+x).html(item[i].atl);
+            $("#coin-ath-"+x).html(item[i].ath + ' €');
+            $("#coin-atl-"+x).html(item[i].atl + ' €');
 
             x = x + 1;
         }
@@ -165,12 +167,18 @@ function UpdateCoinsSelected(checkboxCoin){
       // pulizia 
 
       $('#coinDaysAgo').prop('disabled', true);
+      $("#coinDaysAgo").prop("selectedIndex", 0).change();
       $(".coin-time-series-coin").html('INSERT 3 COINS: ');
       $("#coin-selected1").html('Coin1');
       $("#coin-selected2").html('Coin2');
       $("#coin-selected3").html('Coin3');
 
+      if(chartFlag != null) {
+        chartFlag.destroy();
+      }
+
       for (let x = 1; x < 4; x++) {
+            $("#coin-name"+x).html('');
             $("#coin-symbol"+x).html('');
             $("#coin-current-price"+ x).html('');
             $("#coin-market-cap"+ x).html('');
@@ -217,8 +225,11 @@ async function forecastCoin(coin1, coin2, coin3, daysAgo){
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then(function (response) {
-            // lista = JSON.parse(response.data);
             console.log(response.data);
+
+            deleteLoadingState();
+
+            AxisToChart(response.data[0], response.data[1], response.data[2], daysAgo);
         })
         .catch(function (response) {
           //handle error
@@ -226,33 +237,60 @@ async function forecastCoin(coin1, coin2, coin3, daysAgo){
     });
 }
 
+// Function dateByDaysAgo - get date by days ago
+
+function dateByDaysAgo(days){
+    let today = new Date();
+    today.setDate(today.getDate() + days);
+    return today.toJSON().slice(0,10);
+}
+
+
+async function AxisToChart(data1 , data2, data3, daysAgo) {
+
+    double_list1 = [];
+    double_list2 = [];
+    double_list3 = [];
+
+    for (var i = 0; i <= daysAgo; i++) {
+        double_list1.push([dateByDaysAgo(i - daysAgo), data1[i]]);
+        double_list2.push([dateByDaysAgo(i - daysAgo), data2[i]]);
+        double_list3.push([dateByDaysAgo(i - daysAgo), data3[i]]);
+    }
+
+    for (var i = 1; i < 31; i++) {
+        double_list1.push([dateByDaysAgo(i + 1), data1[i]]);
+        double_list2.push([dateByDaysAgo(i + 1), data2[i]]);
+        double_list3.push([dateByDaysAgo(i + 1), data3[i]]);
+    }
+
+    createChart(double_list1, double_list2, double_list3);
+}
 
 
 ///////////////////////// Gestione attesa caricamento del modello e impossibilita di cambiare moneta ogni secondo
 
 
-async function createChart(){
+
+// Function createChart - Crea il grafico che viene richiamato in forecastCoin()
+
+async function createChart(data1, data2, data3){
 
     var options1 = {
         series: [
             {
-                name: "High - 2013",
-                data: [28, 29, 33, 36, 32, 32, 33]
-              },
-              {
-                name: "Low - 2013",
-                data: [34, 22, 11, 18, 43, 22, 12]
-              },
-              {
-                name: "Low - 2013",
-                data: [32, 42, 54, 32, 39, 12, 67]
-              },
-              {
-                name: "Low - 2013",
-                data: [12, 11, 14, 18, 17, 13, 13]
-              }
-              
-        ],
+              name: coinSelected[0],
+              data: data1
+            },
+            {
+              name: coinSelected[1],
+              data: data2
+            },
+            {
+              name: coinSelected[2],
+              data: data3
+            }
+          ],
         chart: {
             type: 'area',
             stacked: false,
@@ -301,11 +339,11 @@ async function createChart(){
             }
         },
         xaxis: {
-            type: 'numeric',
-            tickAmount: 6,
+            type: 'datetime',
+            tickAmount: 10,
             decimalsInFloat: 0,
             title: {
-                text: 'days ago',
+                text: 'Date',
                 style:{
                     color: '#FFFFFF',
                     fontFamily: 'monospace'
@@ -320,7 +358,7 @@ async function createChart(){
             }
         },
         forecastDataPoints: {
-            count: 0,
+            count: 30,
             fillOpacity: 0.5,
             strokeWidth: undefined,
             dashArray: 4,
@@ -328,7 +366,7 @@ async function createChart(){
         yaxis: {
             type: 'numeric',
             tickAmount: 4,
-            decimalsInFloat: 2,
+            decimalsInFloat: 4,
             title: {
                 text: 'value in €',
                 style:{
@@ -355,16 +393,23 @@ async function createChart(){
             style:{
                 fontFamily: 'monospace'
             }
+        },
+        legend:{
+            show: true,
+            fontFamily: 'monospace',
+            labels: {
+                colors: '#fff'
+            }
         }
     };
     
-    var chart1 = new ApexCharts(document.querySelector("#time-series-coin"), options1);
-    chart1.render();
+    chartFlag = new ApexCharts(document.querySelector("#time-series-coin"), options1);
+    chartFlag.render();
 }
 
 
 
-// function createLoadingState: crea lo stato di loading
+// function createLoadingState: crea ed elimina lo stato di loading
 
 async function createLoadingState(){
     $("#time-series-coin").html('<div style="width: 3rem; height: 3rem;" class="spinner-border m-5" role="status"> <span class="visually-hidden">Loading...</span></div>');
@@ -374,21 +419,6 @@ async function createLoadingState(){
 async function deleteLoadingState(){
     $("#time-series-coin").html('');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -407,8 +437,6 @@ async function manageLoading(days){
     $('#coinDaysAgo').prop('disabled', true);
     createLoadingState();
     await forecastCoin(coinSelected[0], coinSelected[1], coinSelected[2], days);
-    deleteLoadingState();
-    createChart();
     $('#coinDaysAgo').prop('disabled', false);
 }
 

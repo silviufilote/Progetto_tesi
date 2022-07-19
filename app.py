@@ -63,7 +63,7 @@ def neural_coins():
         return yValues
        
     else:
-        return 'non funziona'
+        return 'Error, neural network is not working properly ..'
 
 
 with app.test_request_context():
@@ -72,8 +72,7 @@ with app.test_request_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=True) ## sarebbe false
-    ## app.run(use_reloader=False)
+    app.run(debug=False, use_reloader=False)
 
 
 
