@@ -388,8 +388,10 @@ function insertCoinCard(coin){
         $("#coin-current_price").html(roundNumber(response.data.market_data.current_price.eur,5) + " €");
         $("#coin-high_24h").html(roundNumber(response.data.market_data.high_24h.eur, 5) + " €");
         $("#coin-low_24h").html(roundNumber(response.data.market_data.low_24h.eur, 5) + " €");
+
         $("#coin-price-change-percentage-24h").html(roundNumber(response.data.market_data.price_change_percentage_24h_in_currency.eur,5) + " %");
         $("#coin-price-change-currency-24h").html(roundNumber(response.data.market_data.price_change_24h_in_currency.eur, 5) + " €");
+        
         $("#coin-price-change-percentage-7d").html(roundNumber(response.data.market_data.price_change_percentage_7d_in_currency.eur, 5) + " %");
         $("#coin-price-change-percentage-14d").html(roundNumber(response.data.market_data.price_change_percentage_14d_in_currency.eur, 5) + " %");
         $("#coin-price-change-percentage-30d").html(roundNumber(response.data.market_data.price_change_percentage_30d_in_currency.eur, 5) + " %");
@@ -399,7 +401,16 @@ function insertCoinCard(coin){
 
 
         // nFormatter function 
-        $("#total-supply").html(nFormatter(response.data.market_data.total_supply, 1));
+        total_supply_flag = null;
+
+        if(response.data.market_data.total_supply == null){
+            total_supply_flag = 'Nan';
+        } else{
+            total_supply_flag = nFormatter(response.data.market_data.total_supply, 1);
+        }
+
+
+        $("#total-supply").html(total_supply_flag);
 
         max_supply_flag = null;
         console.log(response.data.market_data.max_supply);
@@ -455,7 +466,7 @@ function freshtimeSeries(item){
 // Function timeSeriesCoin: calcola il max=1000 lista dell'andamento 
 
 async function timeSeriesCoin(yValues, coin){
-    $(".coin-time-series").html(coin.toUpperCase() + " TIME SERIES");
+    $(".coin-time-series").html(coin.toUpperCase() + " NEURAL NETWORK");
 
     var daysAgo = 1000; // max possible to select
 
@@ -607,6 +618,8 @@ async function forecastCoin(daysAgo){
       })
         .then(function (response) {
 
+            console.log(response);
+
             list = [];
             prices = yValues.slice(0, daysAgo).reverse();
 
@@ -653,3 +666,5 @@ async function forecastCoin(daysAgo){
           console.log(response);
     });
 }
+
+

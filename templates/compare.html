@@ -61,121 +61,220 @@
                         <div style="text-align: left;" class="col">
                             <p style="font-size: 1.5rem">Info</p>
                             
+                            <label>id: </label><br>
                             <label>name: </label><br>
-                            <label>symbol: </label><br>
-                            <label>Current price: </label><br>
-                            <label>Market cap:</label><br>
-                            <label>Market cap rank:</label><br>
-
-                            <hr><hr>
-
-                            <label>high 24h:</label><br>
-                            <label>low 24h:</label><br>
-                            <label>Price change 24h €:</label><br>
-                            <label>Price change 24h %:</label><br>
-
-                            <hr><hr>
-
-                            <label>Market change 24h:</label><br>
-                            <label>Market change 24h %:</label><br>
-                            <label>Circulating supply:</label><br>
-
-                            <hr><hr>
-                    
-                            <label>Total supply:</label><br>
-                            <label>Max supply:</label><br>
+                            <label>genesis date: </label><br>
                             <label>ATH (All Time High):</label><br>
                             <label>ATL (All Time Low):</label><br>
+                            <label>ATH change:</label><br>
+                            <label>ATL change:</label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            
+                            <!-- nFormatter function -->
+                            <label>Market cap rank: </label><br>
+                            <label>Market cap: </label><br>
+                            <label>Market cap 24h: </label><br>
+                            <label>Market cap 24h %: </label><br>
+                            <label>Total volume: </label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+
+                            <label>Current price: </label><br>
+                            <label>high 24h: </label><br>
+                            <label>low 24h: </label><br>
+
+                            <label>Price change 24h: </label><br>
+                            <label>Price change 24h in €: </label><br>
+
+                            <label>Price change 7d: </label><br>
+                            <label>Price change 14d: </label><br>
+                            <label>Price change 30d: </label><br>
+                            <label>Price change 60d: </label><br>
+                            <label>Price change 200d: </label><br>
+                            <label>Price change 1y: </label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label>Total supply: </label><br>
+                            <label>Max supply: </label><br>
+                            <label>Circulating supply: </label><br>
                        </div>
                        <div style="text-align: right; display: inline-block;" class="col">
-                            <p  style="font-size: 1.5rem" id="coin-selected1" >Coin1</p>
+                            <p  style="font-size: 1.5rem" id="coin-selected-1" >Coin1</p>
 
-                            <label id="coin-name1"></label><br>
-                            <label id="coin-symbol1"></label><br>
-                            <label id="coin-current-price1"></label><br>
-                            <label id="coin-market-cap1"></label><br>
-                            <label id="coin-market-cap-rank1"></label><br>
-
-                            <hr><hr>
-
-                            <label id="coin-high24-1"></label><br>
-                            <label id="coin-low24-1"></label><br>
-                            <label id="coin-price-change24-1"></label><br>
-                            <label id="coin-price-change24-percentage-1"></label><br>
-
-                            <hr><hr>
-
-                            <label id="coin-market-cap24-1"></label><br>
-                            <label id="coin-market-cap24-percentage-1"></label><br>
-                            <label id="coin-supply-1"></label><br>
-
-                            <hr><hr>
-                            
-                            <label id="coin-total-supply-1"></label><br>
-                            <label id="coin-max-supply-1"></label><br>
+                            <label id="coin-id-1"></label><br>
+                            <label id="coin-name-1"></label><br>
+                            <label id="coin-genesis_date-1"></label><br>
                             <label id="coin-ath-1"></label><br>
                             <label id="coin-atl-1"></label><br>
+                            <label id="coin-ath-change-percentage-1"></label><br>
+                            <label id="coin-atl-change-percentage-1"></label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            
+                            
+                            <label id="coin-market_cap_rank-1"></label><br>
+                            <label id="coin-market_cap-1"></label><br>
+                            <label id="coin-market_cap-change-currency-24h-1"></label><br>
+                            <label id="coin-market_cap-change-percentage-24h-1"></label><br>
+                            <label id="coin-total_volume-1"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+
+                            <label id="coin-current_price-1"></label><br>
+                            <label id="coin-high_24h-1"></label><br>
+                            <label id="coin-low_24h-1"></label><br>
+
+
+                            <label id="coin-price-change-percentage-24h-1"></label><br>
+                            <label id="coin-price-change-currency-24h-1"></label><br>
+
+                            <label id="coin-price-change-percentage-7d-1"></label><br>
+                            <label id="coin-price-change-percentage-14d-1"></label><br>
+                            <label id="coin-price-change-percentage-30d-1"></label><br>
+                            <label id="coin-price-change-percentage-60d-1"></label><br>
+                            <label id="coin-price-change-percentage-200d-1"></label><br>
+                            <label id="coin-price-change-percentage-1y-1"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label id="total-supply-1"></label><br>
+                            <label id="max-supply-1"></label><br>
+                            <label id="circulating-supply-1"></label><br>
 
                        </div>
                        <div style="text-align: right; display: inline-block;" class="col">
-                            <p style="font-size: 1.5rem" id="coin-selected2">Coin2</p>
+                            <p style="font-size: 1.5rem" id="coin-selected-2">Coin2</p>
 
-                            <label id="coin-name2"></label><br>
-                            <label id="coin-symbol2"></label><br>
-                            <label id="coin-current-price2"></label><br>
-                            <label id="coin-market-cap2"></label><br>
-                            <label id="coin-market-cap-rank2"></label><br>
-                            
-                            <hr><hr>
-
-                            <label id="coin-high24-2"></label><br>
-                            <label id="coin-low24-2"></label><br>
-                            <label id="coin-price-change24-2"></label><br>
-                            <label id="coin-price-change24-percentage-2"></label><br>
-
-                            <hr><hr>
-
-                            <label id="coin-market-cap24-2"></label><br>
-                            <label id="coin-market-cap24-percentage-2"></label><br>
-                            <label id="coin-supply-2"></label><br>
-
-                            <hr><hr>
-                            
-                            <label id="coin-total-supply-2"></label><br>
-                            <label id="coin-max-supply-2"></label><br>
+                            <label id="coin-id-2"></label><br>
+                            <label id="coin-name-2"></label><br>
+                            <label id="coin-genesis_date-2"></label><br>
                             <label id="coin-ath-2"></label><br>
                             <label id="coin-atl-2"></label><br>
+                            <label id="coin-ath-change-percentage-2"></label><br>
+                            <label id="coin-atl-change-percentage-2"></label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            
+                            
+                            <label id="coin-market_cap_rank-2"></label><br>
+                            <label id="coin-market_cap-2"></label><br>
+                            <label id="coin-market_cap-change-currency-24h-2"></label><br>
+                            <label id="coin-market_cap-change-percentage-24h-2"></label><br>
+                            <label id="coin-total_volume-2"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+
+                            <label id="coin-current_price-2"></label><br>
+                            <label id="coin-high_24h-2"></label><br>
+                            <label id="coin-low_24h-2"></label><br>
+
+
+                            <label id="coin-price-change-percentage-24h-2"></label><br>
+                            <label id="coin-price-change-currency-24h-2"></label><br>
+
+                            <label id="coin-price-change-percentage-7d-2"></label><br>
+                            <label id="coin-price-change-percentage-14d-2"></label><br>
+                            <label id="coin-price-change-percentage-30d-2"></label><br>
+                            <label id="coin-price-change-percentage-60d-2"></label><br>
+                            <label id="coin-price-change-percentage-200d-2"></label><br>
+                            <label id="coin-price-change-percentage-1y-2"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label id="total-supply-2"></label><br>
+                            <label id="max-supply-2"></label><br>
+                            <label id="circulating-supply-2"></label><br>
                         </div>
                         <div style="text-align: right; display: inline-block;" class="col">
-                            <p style="font-size: 1.5rem" id="coin-selected3">Coin3</p>
+                            <p style="font-size: 1.5rem" id="coin-selected-3">Coin3</p>
 
-                            <label id="coin-name3"></label><br>
-                            <label id="coin-symbol3"></label><br>
-                            <label id="coin-current-price3"></label><br>
-                            <label id="coin-market-cap3"></label><br>
-                            <label id="coin-market-cap-rank3"></label><br>
-
-                            <hr><hr>
-
-                            <label id="coin-high24-3"></label><br>
-                            <label id="coin-low24-3"></label><br>
-                            <label id="coin-price-change24-3"></label><br>
-                            <label id="coin-price-change24-percentage-3"></label><br>
-
-                            <hr><hr>
-
-                            <label id="coin-market-cap24-3"></label><br>
-                            <label id="coin-market-cap24-percentage-3"></label><br>
-                            <label id="coin-supply-3"></label><br>
-
-                            <hr><hr>
-                            
-                            <label id="coin-total-supply-3"></label><br>
-                            <label id="coin-max-supply-3"></label><br>
+                            <label id="coin-id-3"></label><br>
+                            <label id="coin-name-3"></label><br>
+                            <label id="coin-genesis_date-3"></label><br>
                             <label id="coin-ath-3"></label><br>
                             <label id="coin-atl-3"></label><br>
+                            <label id="coin-ath-change-percentage-3"></label><br>
+                            <label id="coin-atl-change-percentage-3"></label><br>
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            
+                            
+                            <label id="coin-market_cap_rank-3"></label><br>
+                            <label id="coin-market_cap-3"></label><br>
+                            <label id="coin-market_cap-change-currency-24h-3"></label><br>
+                            <label id="coin-market_cap-change-percentage-24h-3"></label><br>
+                            <label id="coin-total_volume-3"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+
+                            <label id="coin-current_price-3"></label><br>
+                            <label id="coin-high_24h-3"></label><br>
+                            <label id="coin-low_24h-3"></label><br>
+
+
+                            <label id="coin-price-change-percentage-24h-3"></label><br>
+                            <label id="coin-price-change-currency-24h-3"></label><br>
+
+                            <label id="coin-price-change-percentage-7d-3"></label><br>
+                            <label id="coin-price-change-percentage-14d-3"></label><br>
+                            <label id="coin-price-change-percentage-30d-3"></label><br>
+                            <label id="coin-price-change-percentage-60d-3"></label><br>
+                            <label id="coin-price-change-percentage-200d-3"></label><br>
+                            <label id="coin-price-change-percentage-1y-3"></label><br>
+
+                            <br>
+
+                            <hr><hr>
+
+                            <br>
+                            <label id="total-supply-3"></label><br>
+                            <label id="max-supply-3"></label><br>
+                            <label id="circulating-supply-3"></label><br>
                         </div>
                     </div>
+                    
+                </div>
+                <div>
+                    <p style="margin-top: 2%" class="center">-> check glossary for any help:  <a href="/glossary.html" class="link-warning">click here</a></p>
                 </div>
             </div>
 

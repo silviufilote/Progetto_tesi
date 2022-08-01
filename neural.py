@@ -123,7 +123,12 @@ def neural_network(coin, daysAgo):
     return list(lstmdf)
 
 
-def neural_prediction(coin1, coin2, coin3, daysAgo):
+def neutal_prediction_coin(coin, daysAgo):
+    return_value = neural_network(coin, daysAgo)
+    return str(return_value)
+
+
+def neural_prediction_coins3(coin1, coin2, coin3, daysAgo):
     total_list = []
     
     with concurrent.futures.ThreadPoolExecutor() as executor:

@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, url_for, request
 from model import forecastArima
-from neural import neural_prediction
-
+from neural import neural_prediction_coins3
+from neural import neutal_prediction_coin
 
 app = Flask(__name__)
 
@@ -49,11 +49,10 @@ def forecast_coin():
         coin = request.form['coin']
         daysAgo = request.form['yValues']
 
-        yValues = forecastArima(coin, daysAgo)
+        yValues = neutal_prediction_coin(coin, daysAgo)
         return yValues
-       
     else:
-        return 'non funziona'
+        return 'Error, neural network is not working properly ..'
 
 
 @app.route("/neural.html", methods=['GET', 'POST'])
@@ -64,7 +63,7 @@ def neural_coins():
         coin3 = request.form['coin3']
         daysAgo = request.form['yValues']
 
-        yValues = neural_prediction(coin1, coin2, coin3, daysAgo)
+        yValues = neural_prediction_coins3(coin1, coin2, coin3, daysAgo)
         return yValues
        
     else:
@@ -77,7 +76,7 @@ with app.test_request_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)  # debug = False , use_reloader=False
+    app.run(debug=True, use_reloader=False)  # debug = False , use_reloader=False
 
 
 
