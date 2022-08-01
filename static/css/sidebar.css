@@ -40,6 +40,13 @@
     --tran-03: all 0.3s ease;
     --tran-04: all 0.3s ease;
     --tran-05: all 0.3s ease;
+
+     /* ====== Background color glossary accordions ====== */
+     --var-bg-accordions-title:#e7f1ff;
+     --var-bg-accordions-body:#F2F5F9;
+
+    /* ====== Background color glossary accordions: text in "how do i read statistics" ====== */
+    --var-bg-text: linear-gradient(to left, #cf5c36, #e33b59, #e51f8b, #c635c6, #695cfe);
 }
 
 body{
@@ -69,6 +76,10 @@ body.dark{
     --var-card1-backgound-color: linear-gradient(to left top, #2f4858, #3f405d, #5b324f, #67282d, #593003);
     --var-card2-backgound-color: linear-gradient(to left top, #004522, #234210, #383e00, #4a3800, #593003);
     --var-card3-backgound-color: linear-gradient(to left top, #f59432, #cb7926, #a3601a, #7d470e, #593003);
+
+    /* ====== Background color glossary accordions ====== */
+    --var-bg-accordions-title:#fffae7;
+    --var-bg-accordions-body:#F9F8F2;
 }
 
 /* ===== Sidebar ===== */

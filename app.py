@@ -38,6 +38,11 @@ def compare_page():
     return render_template('compare.html')
 
 
+@app.route("/glossary.html")
+def glossary_page():
+    return render_template('glossary.html')
+
+
 @app.route("/forecast.html", methods=['GET', 'POST'])
 def forecast_coin():
     if request.method == 'POST':
@@ -72,7 +77,7 @@ with app.test_request_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, use_reloader=False)
+    app.run(debug=True)  # debug = False , use_reloader=False
 
 
 

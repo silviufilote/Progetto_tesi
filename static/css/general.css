@@ -1,3 +1,13 @@
+.center{
+    text-align: center;
+}
+
+.subtitle{
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-color);
+}
+
 .statistic-card-text{
     font-size: 3rem;
     text-align: center;
@@ -74,6 +84,22 @@
 	width: 13% !important;
 }
 
+.accordion{
+    --bs-accordion-btn-focus-box-shadow: none !important;
+    --bs-accordion-btn-focus-border-color: none !important;
+    --bs-accordion-active-color: var(--primary-color) !important;
+    --bs-accordion-active-bg: var(--var-bg-accordions-title) !important;
+    /* --bs-accordion-btn-active-icon: none !important; */
+}
+
+.accordion-body{
+    background-color: var(--var-bg-accordions-body);
+}
+
+.background-text{
+    /* background-image: var(--var-bg-text); */
+    background-color: var(--primary-color);
+}
 
 
 @media only screen and (max-width:1000px){

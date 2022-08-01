@@ -307,7 +307,48 @@ async function urlCheck(){
         getSeriesResults(100);
     }
 }
+
+
+// Function nFormatter - number format with letters
+
+function nFormatter(num, digits) {
+    x = num;
+    num = Math.abs(num);
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup.slice().reverse().find(function(item) {
+      return num >= item.value;
+    });
+
+    if(x < 0) {
+        return item ? (- num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+    } else {
+        return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+    }
+  }
   
+
+  // Function roundNumber - for decimals numbers
+  function roundNumber(num, scale) {
+    if(!("" + num).includes("e")) {
+      return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+    } else {
+      var arr = ("" + num).split("e");
+      var sig = ""
+      if(+arr[1] + scale > 0) {
+        sig = "+";
+      }
+      return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+    }
+  }
   
   
   // Function insertCoinCard: riempie la prima card
@@ -330,17 +371,47 @@ function insertCoinCard(coin){
         $("#coin-symbol").html(response.data.symbol);
         $("#coin-name").html(response.data.name);
         $("#coin-genesis_date").html(response.data.genesis_date);
+        $("#coin-ath").html(roundNumber(response.data.market_data.ath.eur, 5) + " €");
+        $("#coin-atl").html(roundNumber(response.data.market_data.atl.eur, 5) + " €");
+        $("#coin-ath-change-percentage").html(roundNumber(response.data.market_data.ath_change_percentage.eur, 5) + " %");
+        $("#coin-atl-change-percentage").html(roundNumber(response.data.market_data.atl_change_percentage.eur, 5) + " %");
 
-        $("#coin-ath").html(response.data.market_data.ath.eur + " €");
-        $("#coin-atl").html(response.data.market_data.atl.eur + " €");
-        $("#coin-current_price").html(response.data.market_data.current_price.eur + " €");
+
+        // nFormatter function 
         $("#coin-market_cap_rank").html(response.data.market_cap_rank);
-        $("#coin-market_cap").html(response.data.market_data.market_cap.eur + " eur");
-        $("#coin-total_volume").html(response.data.market_data.total_volume.eur + " eur");
-        $("#coin-high_24h").html(response.data.market_data.high_24h.eur + " €");
-        $("#coin-low_24h").html(response.data.market_data.low_24h.eur + " €");
-        $("#coin-price_change_24h").html(response.data.market_data.price_change_percentage_24h);
-        $("#coin-price_change_1h").html(response.data.market_data.price_change_percentage_1h_in_currency.eur + " eur");
+        $("#coin-market_cap").html(nFormatter(response.data.market_data.market_cap.eur,1) + " €");
+        $("#coin-market_cap-change-currency-24h").html(nFormatter(response.data.market_data.market_cap_change_24h_in_currency.eur,1) + " €");
+        $("#coin-market_cap-change-percentage-24h").html(roundNumber(response.data.market_data.market_cap_change_percentage_24h_in_currency.eur, 5) + " %");
+        $("#coin-total_volume").html(nFormatter(response.data.market_data.total_volume.eur,1));
+
+
+        $("#coin-current_price").html(roundNumber(response.data.market_data.current_price.eur,5) + " €");
+        $("#coin-high_24h").html(roundNumber(response.data.market_data.high_24h.eur, 5) + " €");
+        $("#coin-low_24h").html(roundNumber(response.data.market_data.low_24h.eur, 5) + " €");
+        $("#coin-price-change-percentage-24h").html(roundNumber(response.data.market_data.price_change_percentage_24h_in_currency.eur,5) + " %");
+        $("#coin-price-change-currency-24h").html(roundNumber(response.data.market_data.price_change_24h_in_currency.eur, 5) + " €");
+        $("#coin-price-change-percentage-7d").html(roundNumber(response.data.market_data.price_change_percentage_7d_in_currency.eur, 5) + " %");
+        $("#coin-price-change-percentage-14d").html(roundNumber(response.data.market_data.price_change_percentage_14d_in_currency.eur, 5) + " %");
+        $("#coin-price-change-percentage-30d").html(roundNumber(response.data.market_data.price_change_percentage_30d_in_currency.eur, 5) + " %");
+        $("#coin-price-change-percentage-60d").html(roundNumber(response.data.market_data.price_change_percentage_60d_in_currency.eur, 5) + " %");
+        $("#coin-price-change-percentage-200d").html(roundNumber(response.data.market_data.price_change_percentage_200d_in_currency.eur, 5) + " %");
+        $("#coin-price-change-percentage-1y").html(roundNumber(response.data.market_data.price_change_percentage_1y_in_currency.eur, 5) + " %");
+
+
+        // nFormatter function 
+        $("#total-supply").html(nFormatter(response.data.market_data.total_supply, 1));
+
+        max_supply_flag = null;
+        console.log(response.data.market_data.max_supply);
+
+        if(response.data.market_data.max_supply == null){
+            max_supply_flag = 'Nan';
+        } else{
+            max_supply_flag = nFormatter(response.data.market_data.max_supply,1);
+        }
+
+        $("#max-supply").html(max_supply_flag);
+        $("#circulating-supply").html(nFormatter(response.data.market_data.circulating_supply, 1));
 
     }).catch(function (error) {
         console.error(error);
