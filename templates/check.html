@@ -12,7 +12,7 @@
         <div class="col-8">
             <div class="input-group mb-3 center">
                 <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="insert crypto's id" id='coinListInput' onchange="freshDropdown()">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Select coin</button>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="selectCoinbtn">Select coin</button>
                 <ul class="dropdown-menu dropdown-menu-end" id='coinListDropdown'>
                     <li class = "dropdown-item"> insert a coin </li>
                 </ul>
@@ -170,7 +170,7 @@
             
             <div class ="card card1-css">
                 <div class="card-body">
-                    <span class="card-title coin-time-series">INSERT A COIN</span>
+                    <span class="card-title" id="time-series-title">INSERT A COIN</span>
                   
                     <div style="margin-top:4%" class="row">
                        <div id = "time-series">
@@ -189,7 +189,7 @@
             
             <div class ="card card1-css">
                 <div class="card-body">
-                    <span class="card-title coin-time-series">INSERT A COIN</span>
+                    <span class="card-title" id="forecast-time-series-title">INSERT A COIN</span>
                   
                     <div style="margin-top:4%" class="row">
                        <div id = "forecasting-time-series">
@@ -208,42 +208,22 @@
             
             <div class ="card card1-css">
                 <div class="card-body">
+
                     <span class="card-title">TIME SERIES RESULTS</span>
                   
-                    <div style="margin-top:2%" class="row">
-                        <div  style="text-align: left;" class="col">
-                            <label>Mean: </label><br>
-                            <label>Highest value: </label><br>
-                            <label>Lowest value: </label><br>
-                            <label>Days ago: </label><br>
-                            <hr><hr>
-                        </div>
-                        <div  style="text-align: right;" class="col">
-                            <label id="series-mean"></label><br>
-                            <label id="series-max"></label><br>
-                            <label id="series-low"></label><br>
-                            <label id="series-daysAgo"></label><br>
-                            <hr><hr>
-                        </div>
+                    <div style="margin-top:2%" id="time-series-params" class="row mBotTitle">
                     </div>
 
-                    <span class="card-title">FORECASTING TIME SERIES RESULTS</span>
 
-                    <div style="margin-top:2%" class="row">
-                        <div  style="text-align: left;" class="col">
-                            <label>Mean: </label><br>
-                            <label>Highest value: </label><br>
-                            <label>Lowest value: </label><br>
-                            <label>Days:</label><br>
-                        </div>
-                        <div  style="text-align: right;" class="col">
-                            <label id="series-forecast-mean"></label><br>
-                            <label id="series-forecast-max"></label><br>
-                            <label id="series-forecast-min"></label><br>
-                            <label id="series-forecast-days"></label><br>
-                        </div>
+
+                    <span class="card-title">NEURAL NETWORK INFO</span>
+
+                    <div style="margin-top:2%;" id="neural-netowrk-params" class="row ">
                     </div>
 
+                </div>
+                <div>
+                    <span class="center">-> check glossary for any help:  <a href="/glossary.html" class="link-warning">click here</a></span>
                 </div>
             </div>
         </div>

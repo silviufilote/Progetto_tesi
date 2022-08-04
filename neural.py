@@ -35,6 +35,7 @@ import concurrent.futures
 
 
 cg = CoinGeckoAPI()
+metrics_neural = []
 
 def create_dataset(dataset, time_step=1):
     dataX, dataY = [], []
@@ -45,6 +46,7 @@ def create_dataset(dataset, time_step=1):
     return np.array(dataX), np.array(dataY)
 
 def neural_network(coin, daysAgo):
+    metrics_neural.clear()
     data = cg.get_coin_market_chart_by_id(id=coin, vs_currency='eur', days=daysAgo, interval = 'daily')['prices']
     array_completo = []
     prices = []
@@ -82,6 +84,48 @@ def neural_network(coin, daysAgo):
     x_input=test_data[len(test_data)-time_step:].reshape(1,-1)
     temp_input=list(x_input)
     temp_input=temp_input[0].tolist()
+
+     ## metrics
+        
+    train_predict=model.predict(X_train)
+    test_predict=model.predict(X_test)
+    train_predict.shape, test_predict.shape
+
+    train_predict = scaler.inverse_transform(train_predict)
+    test_predict = scaler.inverse_transform(test_predict)
+    original_ytrain = scaler.inverse_transform(y_train.reshape(-1,1)) 
+    original_ytest = scaler.inverse_transform(y_test.reshape(-1,1)) 
+    
+    rmse_train = math.sqrt(mean_squared_error(original_ytrain,train_predict))
+    mse_train = mean_squared_error(original_ytrain,train_predict)
+    mae_train = mean_absolute_error(original_ytrain,train_predict)
+                           
+    rmse_test = math.sqrt(mean_squared_error(original_ytest,test_predict))
+    mse_test = mean_squared_error(original_ytest,test_predict)
+    mae_test = mean_absolute_error(original_ytest,test_predict)  
+                          
+    rscore_train = r2_score(original_ytrain, train_predict)
+    rscore_test = r2_score(original_ytest, test_predict)
+                          
+    mgd_train = mean_gamma_deviance(original_ytrain, train_predict)
+    mgd_test = mean_gamma_deviance(original_ytest, test_predict)
+   
+    mpd_train = mean_poisson_deviance(original_ytrain, train_predict)                     
+    mpd_test = mean_poisson_deviance(original_ytest, test_predict)                    
+    
+    metrics_neural.append(rmse_train)
+    metrics_neural.append(mse_train)
+    metrics_neural.append(mae_train)
+    metrics_neural.append(rscore_train)
+    metrics_neural.append(mgd_train)
+    metrics_neural.append(mpd_train)
+    
+    metrics_neural.append(rmse_test)                      
+    metrics_neural.append(mse_test)
+    metrics_neural.append(mae_test)
+    metrics_neural.append(rscore_test)                    
+    metrics_neural.append(mgd_test)
+    metrics_neural.append(mpd_test)
 
     from numpy import array
 
@@ -123,7 +167,7 @@ def neural_network(coin, daysAgo):
     return list(lstmdf)
 
 
-def neutal_prediction_coin(coin, daysAgo):
+def neural_prediction_coin(coin, daysAgo):
     return_value = neural_network(coin, daysAgo)
     return str(return_value)
 
@@ -143,3 +187,7 @@ def neural_prediction_coins3(coin1, coin2, coin3, daysAgo):
         total_list.append(return_value3)
 
     return str(total_list)
+
+
+def metrics():
+    return str(metrics_neural)

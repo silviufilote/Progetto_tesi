@@ -126,6 +126,7 @@
                     <div class="accordion-body">
                       <p>The forecasting model used in this dashboard is: </p>
                       <p class="center"><i>LSTM (Long short term memory)</i></p>
+                      <p>The current model return 30 forecast days.</p>
                     </div>
                   </div>
                 </div>
@@ -151,6 +152,34 @@
                   </div>
                 </div>
 
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        How the total days are counted?
+                    </button>
+                  </h2>
+                  <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>The forecast model returns 30 days. So you have to count that the total days are:</p>
+                        <p class="center"><i>Days ago (selected) + 1 (current crypto price) + 30 forecast days </i></p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        How do i read the neural network metrics?
+                    </button>
+                  </h2>
+                  <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>The forecast model returns 30 days. So you have to count that the total days are:</p>
+                        <p class="center"><i>Days ago (selected) + 1 (current crypto price) + 30 forecast days </i></p>
+                    </div>
+                  </div>
+                </div>
             </div>
 
         </div>

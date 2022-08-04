@@ -1,247 +1,4 @@
 
-/// Daysago option
-
-var options = {
-    series: [{
-        name: "Coin value",
-        data: []
-    }],
-    chart: {
-        type: 'area',
-        stacked: false,
-        height: 350,
-        zoom: {
-            type: 'x',
-            enabled: true,
-            autoScaleYaxis: true
-        },
-        toolbar: {
-            autoSelected: 'zoom'
-        },
-        dropShadow: {
-            enabled: true,
-            enabledOnSeries: undefined,
-            top: 0,
-            left: 0,
-            blur: 0.2,
-            color: '#000',
-            opacity: 0.3
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        curve: 'smooth',
-        lineCap: 'butt',
-        colors: undefined,
-        width: 2,
-        dashArray: 0,
-    },
-    grid: {
-        row: {
-            colors: undefined, // takes an array which will be repeated on columns
-            opacity: 0.5
-        },
-    },
-    theme: {
-        mode: 'light',
-        monochrome: {
-            enabled: true,
-            color: '#00c9b7' ,
-            shadeTo: 'light',
-            shadeIntensity: 0.8
-        },
-    },
-    title:{
-        style:{
-            fontFamily: 'monospace'
-        }
-    },
-    xaxis: {
-        type: 'numeric',
-        tickAmount: 6,
-        decimalsInFloat: 0,
-        title: {
-            text: 'days ago',
-            style:{
-                color: '#FFFFFF',
-                fontFamily: 'monospace'
-            }
-        },
-        labels: {
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: 'white',
-            }
-        }
-    },
-    forecastDataPoints: {
-        count: 0,
-        fillOpacity: 0.5,
-        strokeWidth: undefined,
-        dashArray: 4,
-    },
-    yaxis: {
-        type: 'numeric',
-        tickAmount: 4,
-        decimalsInFloat: 2,
-        title: {
-            text: 'value in €',
-            style:{
-                fontFamily: 'monospace',
-                color: '#FFFFFF'
-            }
-        },
-        labels:{
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: '#fff'
-            }
-        },
-        tooltip:{
-            style:{
-                color:'#F86624',
-            }
-        }
-    },
-    tooltip:{
-        enabled: true,
-        fillSeriesColor: false,
-        style:{
-            fontFamily: 'monospace'
-        }
-    }
-};
-
-var chart = new ApexCharts(document.querySelector("#time-series"), options);
-chart.render();
-
-/// Forecasting prediction data sereies option
-
-var options2 = {
-    series: [{
-        name: "Coin value",
-        data: []
-    }],
-    chart: {
-        type: 'area',
-        stacked: false,
-        height: 350,
-        zoom: {
-            type: 'x',
-            enabled: true,
-            autoScaleYaxis: true
-        },
-        toolbar: {
-            autoSelected: 'zoom'
-        },
-        dropShadow: {
-            enabled: true,
-            enabledOnSeries: undefined,
-            top: 0,
-            left: 0,
-            blur: 0.2,
-            color: '#000',
-            opacity: 0.3
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        curve: 'smooth',
-        lineCap: 'butt',
-        colors: undefined,
-        width: 2,
-        dashArray: 0,
-    },
-    grid: {
-        row: {
-            colors: undefined, // takes an array which will be repeated on columns
-            opacity: 0.5
-        },
-    },
-    theme: {
-        mode: 'light',
-        monochrome: {
-            enabled: true,
-            color: '#00c9b7' ,
-            shadeTo: 'light',
-            shadeIntensity: 0.8
-        },
-    },
-    title:{
-        style:{
-            fontFamily: 'monospace'
-        }
-    },
-    xaxis: {
-        type: 'datetime',
-        tickAmount: 6,
-        decimalsInFloat: 0,
-        title: {
-            text: 'Date',
-            style:{
-                color: '#FFFFFF',
-                fontFamily: 'monospace'
-            }
-        },
-        labels: {
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: 'white',
-            }
-        }
-    },
-    forecastDataPoints: {
-        count: 7,
-        fillOpacity: 0.5,
-        strokeWidth: undefined,
-        dashArray: 4,
-    },
-    yaxis: {
-        type: 'numeric',
-        tickAmount: 4,
-        decimalsInFloat: 2,
-        title: {
-            text: 'value in €',
-            style:{
-                fontFamily: 'monospace',
-                color: '#FFFFFF'
-            }
-        },
-        labels:{
-            show: true,
-            style:{
-                fontFamily: 'monospace',
-                colors: '#fff'
-            }
-        },
-        tooltip:{
-            style:{
-                color:'#F86624',
-            }
-        }
-    },
-    tooltip:{
-        enabled: true,
-        fillSeriesColor: false,
-        style:{
-            fontFamily: 'monospace'
-        }
-    }
-};
-
-var chart2 = new ApexCharts(document.querySelector("#forecasting-time-series"), options2);
-chart2.render();
-
-
 
 ///// Global Variables
 
@@ -249,25 +6,16 @@ var coin = getUrlParameter('coin');
 var coinList = [];
 var yValues = [];
 var todayPrice = null;
+var neuralNetworkChart = null;
+var seriesChart = null;
 
 getIdAllCoins(coinList);
-
 urlCheck();
 
 
 
 
-
-// Function dateByDaysAgo - get date by days ago
-
-function dateByDaysAgo(days){
-    let today = new Date();
-    today.setDate(today.getDate() + days);
-    return today.toJSON().slice(0,10);
-}
-
-
-
+///////////////////////////// => URL CHECK and refill info
 
 
 
@@ -300,13 +48,28 @@ async function urlCheck(){
         $(".coin-title").html('INSERT A COIN');
     }else{
         $('#coinDaysAgo').prop('disabled', false);
-        $("#coinDaysAgo").val("100").change();
+        refillCoinInfo();
         insertCoinCard(coin); // card1
         await timeSeriesCoin(yValues, coin); // card2  Devo aspettare che questo finisca per visualizzare la lista yValues
-        updateChart(100);
-        getSeriesResults(100);
     }
 }
+
+
+
+function refillCoinInfo(){
+    $("#time-series").html('Select days ago, check above...');
+    $("#forecasting-time-series").html('Select days ago, check above...');
+    $('#time-series-title').html(coin.toUpperCase() + ' TIME SERIES');
+    $('#forecast-time-series-title').html(coin.toUpperCase() + ' NEURAL NETWORK');
+    $('#coinListInput').val(coin);
+
+    $("#time-series-params").html('<p style="text-align:center">Select days ago, check above...</p>');
+    $("#neural-netowrk-params").html('<p style="text-align:center">Select days ago, check above...</p>');
+
+}
+
+
+///////////////////////////// =>  Inserimento dati prima card
 
 
 // Function nFormatter - number format with letters
@@ -351,7 +114,7 @@ function nFormatter(num, digits) {
   }
   
   
-  // Function insertCoinCard: riempie la prima card
+// Function insertCoinCard: riempie la prima card
 
 function insertCoinCard(coin){
     var url = "https://api.coingecko.com/api/v3/coins/"+coin;
@@ -413,7 +176,6 @@ function insertCoinCard(coin){
         $("#total-supply").html(total_supply_flag);
 
         max_supply_flag = null;
-        console.log(response.data.market_data.max_supply);
 
         if(response.data.market_data.max_supply == null){
             max_supply_flag = 'Nan';
@@ -432,33 +194,34 @@ function insertCoinCard(coin){
 
 
 
+function clearOnChangeCoin(){
+
+    // Clear daysAgo select
+    $("#coinDaysAgo").prop("selectedIndex", 0);
 
 
-
-// Function drawChart: calcola il max=1000 lista dell'andamento 
-
-async function updateChart(daysAgo){
-    chart.updateSeries([{
-         data: yValues.slice(0, daysAgo)
-    }]);
-    forecastCoin(daysAgo);
-}
-
-
-
-
-
-
-
-// Function freshtimeSeries: refresha la serie tramite selezione della select
-
-function freshtimeSeries(item){
-    if($(item).val() != ''){
-        updateChart($(item).val()); // card2 - card4
-        getSeriesResults($(item).val()); // card3
+    // Clear Card2 - time series chart
+    if(seriesChart != null) {
+        seriesChart.destroy();
     }
+
+    // Clear Card3 - neural network chart
+    if(neuralNetworkChart != null) {
+        neuralNetworkChart.destroy();
+    }
+
+    // Clear card4 - time series metrics
+    $("#series-mean").html('');
+    $("#series-max").html('');
+    $("#series-min").html('');
+    $("#series-daysAgo").html('');
+
+    // Clear card4 - neural network metrics
+    $("#neural-network-total-days").html('');
 }
 
+
+///////////////////////// =========> Inserimento dati seconda card
 
 
 
@@ -466,7 +229,6 @@ function freshtimeSeries(item){
 // Function timeSeriesCoin: calcola il max=1000 lista dell'andamento 
 
 async function timeSeriesCoin(yValues, coin){
-    $(".coin-time-series").html(coin.toUpperCase() + " NEURAL NETWORK");
 
     var daysAgo = 1000; // max possible to select
 
@@ -486,16 +248,14 @@ async function timeSeriesCoin(yValues, coin){
         response.data.prices.forEach(element => {
             yValues.push(element[1]);
         });
-        
-    todayPrice =  yValues.pop();
-    yValues.pop();  // remove todays value
-    yValues.reverse(); // prendere i giorni in ordine: ieri - l'altro ieri
-    //console.log(yValues);
+    
+        todayPrice =  yValues.pop();
+        yValues.reverse(); // prendere i giorni in ordine: ieri - l'altro ieri
     });
 }
 
 
-
+//////////////////////////////// Gestione input - dropbox e flitro
 
 // Function getIdAllCoins: prende tutti gli id dei primi 100 coin di geckocoin
 
@@ -525,7 +285,8 @@ function getIdAllCoins(coinList){
 
 
 
-// Function freshDropdown - inserisce tutti gli id all'interno della dropbox tramite filtro
+// Function freshDropdown - inserisce tutti gli id all'interno della dropbox tramite filtro 
+//                          con funzione getCoinFromInput(item) per elemento
 
 function freshDropdown(){
     $('#coinListDropdown').empty();
@@ -547,34 +308,49 @@ function freshDropdown(){
 
 
 
- // Function getCoinFromInput - carica la pagina se riceve qualcosa tramite input
+ // Function getCoinFromInput - dopo aver selezione il coin della dropbox 
  
  function getCoinFromInput(item){
+
+    clearOnChangeCoin();
+
     coin = $(item).text();
     $('#coinDaysAgo').prop('disabled', false);
-    $("#coinDaysAgo").val("100").change();
-    recalculateCoinSelected_Page();
-}
-
-
-// Function recalculateCoinSelected_Page - ricalcolare la pagine tramite input
-
-async function recalculateCoinSelected_Page(){
+    refillCoinInfo();
     insertCoinCard(coin); // card1
-    await timeSeriesCoin(yValues, coin); // card2
-    updateChart(100);
-    getSeriesResults(100);
+    timeSeriesCoin(yValues, coin); 
 }
 
 
 
+// Function freshtimeSeries - selezione dei days ago
 
-///////////////////////////// Time series calculations
+function freshtimeSeries(item){
+    timeSeriesChart();
+
+    if($(item).val() != ''){
+        updateTimeSeriesChart($(item).val()); // card2 
+        manageLoading($(item).val()); // card3 - Card4 neural 
+        getSeriesResults($(item).val()); // card4 - time series
+    }
+}
 
 
-// Function getSeriesResults - calcola mean, max, min dalla serie 
+function updateTimeSeriesChart(daysAgo){
+    seriesChart.render();
+    seriesChart.updateSeries([{
+        data: yValues.slice(0, daysAgo)
+   }]);
+}
+
+
+
+// Function getSeriesResults - calcola mean, max, min dalla serie => card 3
 
 function getSeriesResults(daysAgo){
+
+    card4TimeSeriesParams();
+
     seriesValues = yValues.slice(0, daysAgo);
 
     max = 0;
@@ -593,15 +369,51 @@ function getSeriesResults(daysAgo){
 
     mean = total / seriesValues.length;
     
-    $("#series-mean").html(mean + " €");
-    $("#series-max").html(max + " €");
-    $("#series-low").html(min + " €");
+    $("#series-mean").html(roundNumber(mean,2) + " €");
+    $("#series-max").html(roundNumber(max,2) + " €");
+    $("#series-min").html(roundNumber(min,2) + " €");
     $("#series-daysAgo").html(seriesValues.length);
 }
 
 
 
 ///////////////////////////// Time series forecatin
+
+// Function dateByDaysAgo - get date by days ago
+
+function dateByDaysAgo(days){
+    let today = new Date();
+    today.setDate(today.getDate() + days);
+    return today.toJSON().slice(0,10);
+}
+
+
+
+// Function Axistochart - calcolate date to data for chart => card 3
+
+async function Axistochart(data, daysAgo){
+
+    list = [];
+    prices = yValues.slice(0, daysAgo).reverse(); 
+
+    for (var i = 0; i < daysAgo; i++) {
+        list.push([dateByDaysAgo(i - daysAgo), prices[i]]);
+    }
+
+    list.push([dateByDaysAgo(0),todayPrice]);  // il valore di oggi
+
+    for (var i = 0; i < (data.length - daysAgo - 1); i++) {
+        list.push([dateByDaysAgo(i + 1), data[i]]);
+    }
+
+    neuralChart(list);
+}
+
+
+
+
+
+// Function forecastCoin - request data for forecast
 
 async function forecastCoin(daysAgo){
 
@@ -610,56 +422,17 @@ async function forecastCoin(daysAgo){
     bodyFormData.append('coin', coin);
     bodyFormData.append('yValues', daysAgo); 
 
-    axios({
+    await axios({
         method: "post",
         url: "forecast.html",
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
-        .then(function (response) {
+        .then(await function (response) {
 
-            console.log(response);
+            deleteLoadingState();
+            Axistochart(response.data, daysAgo);
 
-            list = [];
-            prices = yValues.slice(0, daysAgo).reverse();
-
-
-            for (var i = 0; i < daysAgo; i++) {
-                list.push([dateByDaysAgo(i - daysAgo), prices[i]]);
-            }
-
-            list.push([dateByDaysAgo(0),todayPrice]);  // il valore di oggi
-
-            for (var i = 0; i < response.data.length; i++) {
-                list.push([dateByDaysAgo(i + 1), response.data[i]]);
-            }
-
-            chart2.updateSeries([{
-                data: list
-            }]);
-
-
-            max = 0;
-            min = list[0][1];
-            mean = 0;
-            total = 0;
-
-            for (var i = 0; i < list.length; i++) {
-               if(list[i][1] > max){
-                   max = list[i][1];
-               }
-               if (list[i][1] < min){
-                   min = list[i][1];
-               }
-               total += list[i][1];
-            }
-        
-            mean = total / list.length;
-
-            $('#series-forecast-mean').html(mean + " €");
-            $('#series-forecast-min').html(min + " €");
-            $('#series-forecast-max').html(max + " €");
-            $('#series-forecast-days').html(list.length);
         })
         .catch(function (response) {
           //handle error
@@ -667,4 +440,333 @@ async function forecastCoin(daysAgo){
     });
 }
 
+ 
 
+///////////////////////// Gestione attesa caricamento del modello e impossibilita di cambiare moneta ogni secondo
+
+// Function neuralChart - card3 Neural network chart
+
+async function neuralChart(data){
+
+    var options2 = {
+        series: [{
+            name: "Coin value",
+            data: data
+        }],
+        chart: {
+            type: 'area',
+            stacked: false,
+            height: 350,
+            zoom: {
+                type: 'x',
+                enabled: true,
+                autoScaleYaxis: true
+            },
+            toolbar: {
+                autoSelected: 'zoom'
+            },
+            dropShadow: {
+                enabled: true,
+                enabledOnSeries: undefined,
+                top: 0,
+                left: 0,
+                blur: 0.2,
+                color: '#000',
+                opacity: 0.3
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            lineCap: 'butt',
+            colors: undefined,
+            width: 2,
+            dashArray: 0,
+        },
+        grid: {
+            row: {
+                colors: undefined, // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        theme: {
+            mode: 'light',
+            monochrome: {
+                enabled: true,
+                color: '#00c9b7' ,
+                shadeTo: 'light',
+                shadeIntensity: 0.8
+            },
+        },
+        title:{
+            style:{
+                fontFamily: 'monospace'
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            tickAmount: 6,
+            decimalsInFloat: 0,
+            title: {
+                text: 'Date',
+                style:{
+                    color: '#FFFFFF',
+                    fontFamily: 'monospace'
+                }
+            },
+            labels: {
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: 'white',
+                }
+            }
+        },
+        forecastDataPoints: {
+            count: 30,
+            fillOpacity: 0.5,
+            strokeWidth: undefined,
+            dashArray: 4,
+        },
+        yaxis: {
+            type: 'numeric',
+            tickAmount: 4,
+            decimalsInFloat: 2,
+            title: {
+                text: 'value in €',
+                style:{
+                    fontFamily: 'monospace',
+                    color: '#FFFFFF'
+                }
+            },
+            labels:{
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: '#fff'
+                }
+            },
+            tooltip:{
+                style:{
+                    color:'#F86624',
+                }
+            }
+        },
+        tooltip:{
+            enabled: true,
+            fillSeriesColor: false,
+            style:{
+                fontFamily: 'monospace'
+            }
+        }
+    };
+
+    neuralNetworkChart = new ApexCharts(document.querySelector("#forecasting-time-series"), options2);
+    neuralNetworkChart.render();
+}
+
+
+async function timeSeriesChart(){
+
+    var options = {
+        series: [{
+            name: "Coin value",
+            data: []
+        }],
+        chart: {
+            type: 'area',
+            stacked: false,
+            height: 350,
+            zoom: {
+                type: 'x',
+                enabled: true,
+                autoScaleYaxis: true
+            },
+            toolbar: {
+                autoSelected: 'zoom'
+            },
+            dropShadow: {
+                enabled: true,
+                enabledOnSeries: undefined,
+                top: 0,
+                left: 0,
+                blur: 0.2,
+                color: '#000',
+                opacity: 0.3
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            lineCap: 'butt',
+            colors: undefined,
+            width: 2,
+            dashArray: 0,
+        },
+        grid: {
+            row: {
+                colors: undefined, // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        theme: {
+            mode: 'light',
+            monochrome: {
+                enabled: true,
+                color: '#00c9b7' ,
+                shadeTo: 'light',
+                shadeIntensity: 0.8
+            },
+        },
+        title:{
+            style:{
+                fontFamily: 'monospace'
+            }
+        },
+        xaxis: {
+            type: 'numeric',
+            tickAmount: 6,
+            decimalsInFloat: 0,
+            title: {
+                text: 'days ago',
+                style:{
+                    color: '#FFFFFF',
+                    fontFamily: 'monospace'
+                }
+            },
+            labels: {
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: 'white',
+                }
+            }
+        },
+        forecastDataPoints: {
+            count: 0,
+            fillOpacity: 0.5,
+            strokeWidth: undefined,
+            dashArray: 4,
+        },
+        yaxis: {
+            type: 'numeric',
+            tickAmount: 4,
+            decimalsInFloat: 2,
+            title: {
+                text: 'value in €',
+                style:{
+                    fontFamily: 'monospace',
+                    color: '#FFFFFF'
+                }
+            },
+            labels:{
+                show: true,
+                style:{
+                    fontFamily: 'monospace',
+                    colors: '#fff'
+                }
+            },
+            tooltip:{
+                style:{
+                    color:'#F86624',
+                }
+            }
+        },
+        tooltip:{
+            enabled: true,
+            fillSeriesColor: false,
+            style:{
+                fontFamily: 'monospace'
+            }
+        }
+    };
+
+    seriesChart = new ApexCharts(document.querySelector("#time-series"), options);
+}
+
+
+// function createLoadingState: crea ed elimina lo stato di loading
+
+async function createLoadingState(){
+    $("#forecasting-time-series").html('<div style="width: 3rem; height: 3rem;" class="spinner-border m-5" role="status"> <span class="visually-hidden">Loading...</span></div>');
+    $("#neural-netowrk-params").html('<div style="text-align: center"><div style="width: 3rem; height: 3rem;" class="spinner-border m-5" role="status"> <span style="text-align: center" class="visually-hidden">Loading...</span></div></div>');
+}
+
+
+async function deleteLoadingState(){
+    $("#forecasting-time-series").html('');
+    $("#neural-netowrk-params").html('');
+}
+
+
+
+// Function neuralChart - card3/card4 neural chart and info
+
+async function manageLoading(days){
+    $('#selectCoinbtn').prop('disabled', true);
+    $('#coinDaysAgo').prop('disabled', true);
+    $('#coinListInput').prop('disabled', true);
+    createLoadingState();
+    await forecastCoin(days);
+    card4NeuralNetworkParams(); // create labels to Card4
+    getMetrics(); // card4 - neural network
+    $('#coinDaysAgo').prop('disabled', false);
+    $('#coinListInput').prop('disabled', false);
+    $('#selectCoinbtn').prop('disabled', false);
+}
+
+
+async function card4NeuralNetworkParams(){
+    $('#neural-netowrk-params').html('<div style="text-align: left;" class="col"> <label>Days:</label><br> <label>Forecasted days:</label><br> <label>Test data:</label><br> <label>Train data:</label><br> <hr><hr> <label>Train RMSE</label><br> <label>Train MSE:</label><br> <label>Train MAE</label><br> <label>Train RSCORE:</label><br> <label>Train MGD</label><br> <label>Train MPD:</label><br> <hr><hr> <label>Test RMSE</label><br> <label>Test MSE:</label><br> <label>Test MAE</label><br> <label>Test RSCORE:</label><br> <label>Test MGD</label><br> <label>Test MPD:</label><br> </div> <div style="text-align: right;" class="col"> <label id="neural-network-total-days"></label><br> <label id="neural-network-forecasted-days"></label><br> <label id="neural-network-train-data"></label><br> <label id="neural-network-test-data"></label><br> <hr><hr> <label id="neural-network-train-rmse"></label><br> <label id="neural-network-train-mse"></label><br> <label id="neural-network-train-mae"></label><br> <label id="neural-network-train-rscore"></label><br> <label id="neural-network-train-mgd"></label><br> <label id="neural-network-train-mpd"></label><br> <hr><hr> <label id="neural-network-test-rmse"></label><br> <label id="neural-network-test-mse"></label><br> <label id="neural-network-test-mae"></label><br> <label id="neural-network-test-rscore"></label><br> <label id="neural-network-test-mgd"></label><br> <label id="neural-network-test-mpd"></label><br> </div>');
+}
+
+
+async function card4TimeSeriesParams(){
+    $('#time-series-params').html(' <div style="text-align: left;" class="col"> <label>Mean: </label><br> <label>Highest value: </label><br> <label>Lowest value: </label><br> <label>Days ago: </label><br> <hr><hr> </div> <div style="text-align: right;" class="col"> <label id="series-mean"></label><br> <label id="series-max"></label><br> <label id="series-min"></label><br> <label id="series-daysAgo"></label><br> <hr><hr> </div>');
+}
+
+async function getMetrics(){
+    await axios({
+        method: "post",
+        url: "metrics.html",
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then(await function (response) {
+
+            console.log(response.data);
+
+            daysTimeSeries = $('#series-daysAgo').text();
+
+
+            $('#neural-network-total-days').html(parseFloat(daysTimeSeries)  + 1 + 30);
+            $('#neural-network-forecasted-days').html(30);
+
+            $('#neural-network-train-data').html('60% of total dataset');
+            $('#neural-network-test-data').html('40% of total dataset');
+
+            $('#neural-network-train-rmse').html(roundNumber(response.data[0],5));
+            $('#neural-network-train-mse').html(roundNumber(response.data[1],5));
+            $('#neural-network-train-mae').html(roundNumber(response.data[2],5));
+            $('#neural-network-train-rscore').html(roundNumber(response.data[3],5));
+            $('#neural-network-train-mgd').html(roundNumber(response.data[4],5));
+            $('#neural-network-train-mpd').html(roundNumber(response.data[5],5));
+
+            $('#neural-network-test-rmse').html(roundNumber(response.data[6],5));
+            $('#neural-network-test-mse').html(roundNumber(response.data[7],5));
+            $('#neural-network-test-mae').html(roundNumber(response.data[8],5));
+            $('#neural-network-test-rscore').html(roundNumber(response.data[9],5));
+            $('#neural-network-test-mgd').html(roundNumber(response.data[10],5));
+            $('#neural-network-test-mpd').html(roundNumber(response.data[11],5));
+
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+    });
+}
