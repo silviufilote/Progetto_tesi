@@ -175,8 +175,23 @@
                   </h2>
                   <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <p>The forecast model returns 30 days. So you have to count that the total days are:</p>
-                        <p class="center"><i>Days ago (selected) + 1 (current crypto price) + 30 forecast days </i></p>
+                        
+                      <p><strong class="badge background-text text-wrap">RMSE:</strong> is a standard deviation of prediction errors or residuals. It indicates how spread out the data is around the line of best fit. RMSE also has the useful property of being on the same scale/units as the Target variable. As the name suggests, it is the square root of average squared errors between observed and predicted values for the target variable.</p>
+
+                      <p><strong class="badge background-text text-wrap">MSE:</strong> tells you how close a regression line is to a set of points. It does this by taking the distances from the points to the regression line (these distances are the “errors”) and squaring them. The squaring is necessary to remove any negative signs. It also gives more weight to larger differences. It’s called the mean squared error as you’re finding the average of a set of errors. The lower the MSE, the better the forecast.</p>
+
+                      <p><strong class="badge background-text text-wrap">MAE: </strong> is the average of all absolute errors. It is the difference between the measured value and “true” value. </p>
+
+                      <p><strong class="badge background-text text-wrap">RSCORE:</strong> correlation coefficient formulas are used to find how strong a relationship is between data. The formulas return a value between -1 and 1, where </p>
+                      <p class="center"><i>1 indicates a strong positive relationship;</i></p>
+                      <p class="center"><i>-1 indicates a strong negative relationship;</i></p>
+                      <p class="center"><i>0 indicates no relationship at all;</i></p>
+
+                      <p><strong class="badge background-text text-wrap">MGD:</strong> Mean Gamma deviance regression loss. Gamma deviance is equivalent to the Tweedie deviance with the power parameter power=2 . It is invariant to scaling of the target variable, and measures relative errors. In general, the higher power the less weight is given to extreme deviations between true and predicted targets </p>
+                      <p class="center"><i>Returns a non-negative floating point value (the best value is 0.0).</i></p>
+
+                      <p><strong class="badge background-text text-wrap">MPD:</strong> Mean Poisson deviance regression loss. Poisson deviance is equivalent to the Tweedie deviance with the power parameter power=1. </p>
+                      <p class="center"><i>Returns a non-negative floating point value (the best value is 0.0).</i></p>
                     </div>
                   </div>
                 </div>

@@ -728,7 +728,7 @@ async function card4NeuralNetworkParams(){
 
 
 async function card4TimeSeriesParams(){
-    $('#time-series-params').html(' <div style="text-align: left;" class="col"> <label>Mean: </label><br> <label>Highest value: </label><br> <label>Lowest value: </label><br> <label>Days ago: </label><br> <hr><hr> </div> <div style="text-align: right;" class="col"> <label id="series-mean"></label><br> <label id="series-max"></label><br> <label id="series-min"></label><br> <label id="series-daysAgo"></label><br> <hr><hr> </div>');
+    $('#time-series-params').html(' <div style="text-align: left;" class="col"> <label>Mean: </label><br> <label>Highest value: </label><br> <label>Lowest value: </label><br> <label>Days ago: </label><br></div> <div style="text-align: right;" class="col"> <label id="series-mean"></label><br> <label id="series-max"></label><br> <label id="series-min"></label><br> <label id="series-daysAgo"></label><br> </div>');
 }
 
 async function getMetrics(){
@@ -750,16 +750,16 @@ async function getMetrics(){
             $('#neural-network-train-data').html('60% of total dataset');
             $('#neural-network-test-data').html('40% of total dataset');
 
-            $('#neural-network-train-rmse').html(roundNumber(response.data[0],5));
-            $('#neural-network-train-mse').html(roundNumber(response.data[1],5));
-            $('#neural-network-train-mae').html(roundNumber(response.data[2],5));
+            $('#neural-network-train-rmse').html(roundNumber(response.data[0],5) + ' €');
+            $('#neural-network-train-mse').html(roundNumber(response.data[1],5) + ' €');
+            $('#neural-network-train-mae').html(roundNumber(response.data[2],5) + ' €');
             $('#neural-network-train-rscore').html(roundNumber(response.data[3],5));
             $('#neural-network-train-mgd').html(roundNumber(response.data[4],5));
             $('#neural-network-train-mpd').html(roundNumber(response.data[5],5));
 
-            $('#neural-network-test-rmse').html(roundNumber(response.data[6],5));
-            $('#neural-network-test-mse').html(roundNumber(response.data[7],5));
-            $('#neural-network-test-mae').html(roundNumber(response.data[8],5));
+            $('#neural-network-test-rmse').html(roundNumber(response.data[6],5)  + ' €');
+            $('#neural-network-test-mse').html(roundNumber(response.data[7],5)  + ' €');
+            $('#neural-network-test-mae').html(roundNumber(response.data[8],5)  + ' €');
             $('#neural-network-test-rscore').html(roundNumber(response.data[9],5));
             $('#neural-network-test-mgd').html(roundNumber(response.data[10],5));
             $('#neural-network-test-mpd').html(roundNumber(response.data[11],5));
