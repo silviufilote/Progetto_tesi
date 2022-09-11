@@ -709,6 +709,11 @@ async function deleteLoadingState(){
 // Function neuralChart - card3/card4 neural chart and info
 
 async function manageLoading(days){
+
+    if(neuralNetworkChart != null) {
+        neuralNetworkChart.destroy();
+    }
+
     $('#selectCoinbtn').prop('disabled', true);
     $('#coinDaysAgo').prop('disabled', true);
     $('#coinListInput').prop('disabled', true);

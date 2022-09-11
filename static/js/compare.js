@@ -505,12 +505,22 @@ async function selectDaysAgo(item){
 
 
 async function manageLoading(days){
+
+    if(chartFlag != null) {
+        chartFlag.destroy();
+    }
+
     $('#coinDaysAgo').prop('disabled', true);
     $('#coinListInput').prop('disabled', true);
+    $("input.form-check-input").prop("disabled", true);
+    $('#btn-select-coin').prop('disabled', true);
     createLoadingState();
     await forecastCoin(coinSelected[0], coinSelected[1], coinSelected[2], days);
     $('#coinDaysAgo').prop('disabled', false);
     $('#coinListInput').prop('disabled', false);
+    $("input.form-check-input").prop("disabled", false);
+    $('#btn-select-coin').prop('disabled', false);
 }
+
 
 
