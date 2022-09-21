@@ -22,11 +22,31 @@ Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_
 3. Spostarsi con il terminale nella cartella unzippata usando i comandi:
 
 ````
-cd cartella  // entrare nella cartella
-cd . // uscire dalla cartella
+C:\Users\fsilv\Desktop\Progetto_tesi>dir
+ Volume in drive C has no label.
+ Volume Serial Number is C8DF-26E9
+
+ Directory of C:\Users\fsilv\Desktop\Progetto_tesi
+
+17/09/2022  14:48    <DIR>          .
+17/09/2022  14:48    <DIR>          ..
+04/08/2022  11:57             2.224 app.py
+11/07/2022  16:21    <DIR>          env
+27/06/2022  23:20             1.147 model.py
+04/08/2022  11:44             6.707 neural.py
+11/07/2022  16:12                67 README.md
+11/07/2022  16:21    <DIR>          static
+29/07/2022  12:40    <DIR>          templates
+04/08/2022  11:47    <DIR>          __pycache__
+               4 File(s)         10.145 bytes
+               6 Dir(s)  142.987.628.544 bytes free
 ````
 4. Raggiunta la cartella eseguire il seguente codice:
 
-''''
-qwerqwerqwer
-''''
+````
+python app.py
+````
+
+5. Con il browser spostartsi su [localhost](http://127.0.0.1:80). 
+6. Per la chiusura del server eseguire sempre all'interno del terminale dove avete avviato il progetto CTRL+C
+
