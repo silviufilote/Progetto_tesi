@@ -17,7 +17,7 @@ Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_
 # Processo di avviamento del progetto:
 1. Scaricare il zip del progetto intero
 2. Unzippare il progetto 
-3. Spostarsi con il terminale nella cartella unzippata usando i comandi:
+3. Spostarsi con il terminale nella cartella unzippata:
 
 ````
 C:\Users\fsilv\Desktop\Progetto_tesi>dir
