@@ -1,4 +1,4 @@
-### CoinStatus dashboard
+# CoinStatus dashboard
 Tesi di laurea triennale: ingegneria informatica
 
 # Requisiti di sistema:
@@ -17,14 +17,16 @@ Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_
 
 
 # Processo di avviamento del progetto:
-1. scaricare il zip del progetto intero
-2. unzippare il progetto 
-3. spostarsi con il terminale nella cartella unzippata usando i comandi:
-4. 
-
+1. Scaricare il zip del progetto intero
+2. Unzippare il progetto 
+3. Spostarsi con il terminale nella cartella unzippata usando i comandi:
 
 ````
-```
-Look! You can see my backticks.
-```
+cd cartella  // entrare nella cartella
+cd . // uscire dalla cartella
 ````
+4. Raggiunta la cartella eseguire il seguente codice:
+
+''''
+qwerqwerqwer
+''''
