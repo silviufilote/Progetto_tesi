@@ -87,7 +87,7 @@ with app.test_request_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)  # debug = False , use_reloader=False
+    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=80)  # debug = False , use_reloader=False
 
 
 
