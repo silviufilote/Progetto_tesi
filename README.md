@@ -11,7 +11,6 @@ Tesi di laurea triennale: ingegneria informatica
 # Requisiti software:
 - Python 3.7–3.10
 - pip versione 19.0 o successiva per Linux (richiede il supporto manylinux2010 ) e Windows. pip versione 20.3 o successiva per macOS.
-- Windows Native richiede Microsoft Visual C++ ridistribuibile per Visual Studio 2015, 2017 e 2019
 
 Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_requirements).
 
