@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ````
 
 
-5. Eseguire il seguente codice:
+5. Successivamente eseguire:
 
 ````
 python app.py
