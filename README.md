@@ -50,3 +50,18 @@ python app.py
 5. Con il browser spostartsi su [localhost](http://127.0.0.1:80). 
 6. Per la chiusura del server eseguire sempre all'interno del terminale dove avete avviato il progetto CTRL+C
 
+````
+C:\Users\fsilv\Desktop\Progetto_tesi>python app.py
+/forecast.html
+/neural.html
+/metrics.html
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://192.168.1.2:80/ (Press CTRL+C to quit)
+127.0.0.1 - - [21/Sep/2022 12:23:06] "GET / HTTP/1.1" 200 -
+````
