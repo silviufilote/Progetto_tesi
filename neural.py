@@ -20,16 +20,8 @@ from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.layers import LSTM
 
 
-# For PLotting we will use these library
-from itertools import cycle
-import plotly.graph_objects as go
-import plotly.express as px
-from plotly.subplots import make_subplots
-
 # My libraries
-
 from pycoingecko import CoinGeckoAPI
-import json
 from datetime import date, timedelta
 import concurrent.futures
 

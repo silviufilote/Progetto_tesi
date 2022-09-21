@@ -10,8 +10,6 @@ Tesi di laurea triennale: ingegneria informatica
 
 # Requisiti software:
 - Python 3.7–3.10 [cliccare qua](https://www.python.org/downloads/) e seguire le seguenti [indicazioni](https://www.youtube.com/watch?v=Kn1HF3oD19c&ab_channel=AmitThinks)
-- Cartella env [cliccare qua](https://drive.google.com/file/d/1XqUkU07LKIGadzom-yidAzW-CWLFDJi4/view?usp=sharing)
-- pip versione 19.0 o successiva per Linux (richiede il supporto manylinux2010 ) e Windows. pip versione 20.3 o successiva per macOS.
 
 Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_requirements).
 
@@ -19,8 +17,7 @@ Per altre info:  [cliccare qua](https://www.tensorflow.org/install/pip#software_
 # Processo di avviamento del progetto:
 1. Scaricare il zip del progetto intero
 2. Unzippare il progetto 
-3. Inserire la cartella *env* dentro il progetto
-4. Spostarsi con il terminale nella cartella unzippata usando i comandi:
+3. Spostarsi con il terminale nella cartella unzippata usando i comandi:
 
 ````
 C:\Users\fsilv\Desktop\Progetto_tesi>dir
@@ -42,7 +39,15 @@ C:\Users\fsilv\Desktop\Progetto_tesi>dir
                4 File(s)         10.145 bytes
                6 Dir(s)  142.987.628.544 bytes free
 ````
-5. Raggiunta la cartella eseguire il seguente codice:
+
+4. Raggiunta la cartella eseguire il seguente codice:
+
+````
+pip install -r requirements.txt
+````
+
+
+5. Eseguire il seguente codice:
 
 ````
 python app.py
