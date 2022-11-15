@@ -744,8 +744,6 @@ async function getMetrics(){
       })
         .then(await function (response) {
 
-            console.log(response.data);
-
             daysTimeSeries = $('#series-daysAgo').text();
 
 
